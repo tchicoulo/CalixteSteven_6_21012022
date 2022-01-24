@@ -5,17 +5,42 @@ async function getPhotographers() {
     .then((res) => res.json())
     .then((data) => (photographers = data));
   // et bien retourner le tableau photographers seulement une fois
+  console.log(photographers);
   return photographers;
 }
 
-async function displayData(photographers) {
+function displayData(photographers) {
   const photographersSection = document.querySelector(".photographer_section");
 
-  photographers.forEach((photographer) => {
-    const photographerModel = photographerFactory(photographer);
-    const userCardDOM = photographerModel.getUserCardDOM();
-    photographersSection.appendChild(userCardDOM);
-  });
+  photographersSection.innerHTML = photographers.map(
+    (photographer) =>
+      `  
+    <article>
+      <a href="./photographer.html?id=${photographer.id}"><div>
+        <img
+          src="./assets/photographers/Photographers ID Photos/${photographer.portrait}"
+          alt=""
+        />
+        <h2>${photographer.name}</h2>
+        </a>
+      </div>
+      <div class="description">
+        <p>
+          ${photographer.city}, ${photographer.country}
+        </p>
+        <p>${photographer.tagline}</p>
+        <p>${photographer.price}</p>
+      </div>
+    </article>
+    `
+  );
+
+  // photographers.forEach((photographer) => {
+  // const photographerModel = photographerFactory(photographer);
+  // const userCardDOM = photographerModel.getUserCardDOM();
+  // photographersSection.appendChild(userCardDOM);
+
+  // });
 }
 
 async function init() {
