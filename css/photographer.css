@@ -10,8 +10,23 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 2px solid blue;
 }
+.details-photograph {
+  line-height: 70px;
+}
+.details-photograph > h1 {
+  font-size: 45px;
+  color: #d3573c;
+}
+.details-photograph > p {
+  font-size: 25px;
+  color: #901c1c;
+}
+.details-photograph > span {
+  font-size: 20px;
+  color: #525252;
+}
+
 .photograph-header > img {
   width: 200px;
   height: 200px;
@@ -25,11 +40,15 @@
   margin-right: 100px;
   padding: 11px;
   width: 170px;
-  height: 70px;
+  height: 69px;
   border: none;
   background-color: #901c1c;
   border-radius: 5px;
   cursor: pointer;
+}
+.contact_button:hover {
+  background-color: #db8876;
+  color: black;
 }
 
 .modal {

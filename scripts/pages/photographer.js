@@ -1,4 +1,3 @@
-// récupérer le photograph avec l'id
 let queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const idPhotograph = JSON.parse(urlParams.get("id"));
@@ -8,6 +7,7 @@ async function getJson() {
     .then((res) => res.json())
     .then((data) => {
       Banner(data.photographers);
+      Gallery(data.media);
     });
 }
 
@@ -17,7 +17,6 @@ function Banner(data) {
   const photographId = data.filter(
     (photograph) => photograph.id === idPhotograph
   );
-  console.log(photographId);
 
   for (elem of photographId) {
     photographHeader.innerHTML = `
@@ -32,5 +31,21 @@ function Banner(data) {
     <img src="assets/photographers/Photographers ID Photos/${elem.portrait}" alt="portrait de ${elem.name}" />`;
   }
 }
+
+function Gallery(data) {
+  console.log(data);
+}
+
+const utils = {
+  displayModal: function () {
+    const modal = document.getElementById("contact_modal");
+    modal.style.display = "block";
+  },
+
+  closeModal: function () {
+    const modal = document.getElementById("contact_modal");
+    modal.style.display = "none";
+  },
+};
 
 getJson();
