@@ -59,7 +59,16 @@ a {
 }
 
 .photographer_section article img {
-  height: 200px;
-  width: 200px;
+  height: 280px;
+  width: 280px;
   border-radius: 50%;
+}
+.home-city {
+  color: #901c1c;
+  font-size: 17px;
+}
+
+.home-price {
+  color: grey;
+  font-size: 15px;
 }

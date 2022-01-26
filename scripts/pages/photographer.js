@@ -3,22 +3,34 @@ let queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const idPhotograph = JSON.parse(urlParams.get("id"));
 
-async function getPhotograph() {
-  let photographer = [];
-
+async function getJson() {
   await fetch("./data/photographers.json")
     .then((res) => res.json())
     .then((data) => {
-      let results = data.photographers;
-      const filter = results.filter((obj) => {
-        return obj.id === idPhotograph;
-      });
-      for (elem of filter) {
-        photographer = elem;
-      }
+      Banner(data.photographers);
     });
-  console.log(photographer.name);
-  return photographer;
 }
 
-getPhotograph();
+function Banner(data) {
+  const photographHeader = document.querySelector(".photograph-header");
+
+  const photographId = data.filter(
+    (photograph) => photograph.id === idPhotograph
+  );
+  console.log(photographId);
+
+  for (elem of photographId) {
+    photographHeader.innerHTML = `
+    <div class='details-photograph'>
+      <h1>${elem.name}</h1>
+      <p>${elem.city}, ${elem.country}</p>
+      <span>${elem.tagline}</span>
+    </div>
+    <button class="contact_button" onclick="displayModal()">
+          Contactez-moi
+        </button>
+    <img src="assets/photographers/Photographers ID Photos/${elem.portrait}" alt="portrait de ${elem.name}" />`;
+  }
+}
+
+getJson();
