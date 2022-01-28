@@ -1,3 +1,5 @@
+import Display from "../factories/Display.js";
+
 async function getPhotographers() {
   // Penser à remplacer par les données récupérées dans le json
   let photographers = [];
@@ -12,37 +14,9 @@ async function getPhotographers() {
 function displayData(photographers) {
   const photographersSection = document.querySelector(".photographer_section");
 
-  photographersSection.innerHTML = photographers.map(
-    (photographer) =>
-      `  
-    <article>
-      <a href="./photographer.html?id=${photographer.id}"><div>
-        <img
-          src="./assets/photographers/Photographers ID Photos/${
-            photographer.portrait
-          }"
-          alt="Aller sur la page photographe du nom de ${photographer.name}"
-        />
-        <h2>${photographer.name}</h2>
-        </a>
-      </div>
-      <div class="description">
-        <p class= "home-city">
-          ${photographer.city}, ${photographer.country}
-        </p>
-        <p>${photographer.tagline}</p>
-        <p class="home-price">${Math.round(photographer.price / 7)}€/heure</p>
-      </div>
-    </article>
-    `
+  photographersSection.innerHTML = photographers.map((photographer) =>
+    Display.displayPhotographers(photographer)
   );
-
-  // photographers.forEach((photographer) => {
-  // const photographerModel = photographerFactory(photographer);
-  // const userCardDOM = photographerModel.getUserCardDOM();
-  // photographersSection.appendChild(userCardDOM);
-
-  // });
 }
 
 async function init() {

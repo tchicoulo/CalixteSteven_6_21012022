@@ -31,6 +31,7 @@
   width: 200px;
   height: 200px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .contact_button {
@@ -49,6 +50,31 @@
 .contact_button:hover {
   background-color: #db8876;
   color: black;
+}
+
+.gallery {
+  margin: 50px 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.gallery-content {
+  margin: 25px 15px;
+}
+
+.gallery-content > img {
+  height: 300px;
+  width: 350px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.gallery-details {
+  color: #911c1c;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .modal {

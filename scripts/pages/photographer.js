@@ -1,3 +1,6 @@
+import { displayModal, closeModal } from "../utils/contactForm.js";
+import Display from "../factories/Display.js";
+
 let queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const idPhotograph = JSON.parse(urlParams.get("id"));
@@ -14,38 +17,40 @@ async function getJson() {
 function Banner(data) {
   const photographHeader = document.querySelector(".photograph-header");
 
-  const photographId = data.filter(
+  const photographersId = data.filter(
     (photograph) => photograph.id === idPhotograph
   );
+  photographersId.map((photographId) => {
+    const results = (photographHeader.innerHTML =
+      Display.displayBanner(photographId));
 
-  for (elem of photographId) {
-    photographHeader.innerHTML = `
-    <div class='details-photograph'>
-      <h1>${elem.name}</h1>
-      <p>${elem.city}, ${elem.country}</p>
-      <span>${elem.tagline}</span>
-    </div>
-    <button class="contact_button" onclick="displayModal()">
-          Contactez-moi
-        </button>
-    <img src="assets/photographers/Photographers ID Photos/${elem.portrait}" alt="portrait de ${elem.name}" />`;
-  }
+    const btnContact = document.querySelector(".contact_button");
+    btnContact.addEventListener("click", displayModal);
+
+    return results;
+  });
 }
 
 function Gallery(data) {
-  console.log(data);
+  const gallery = document.querySelector(".gallery");
+  const galleryId = data.filter(
+    (idPics) => idPics.photographerId === idPhotograph
+  );
+  console.log(galleryId);
+  gallery.innerHTML = galleryId.map(
+    (idPic) => `
+    <div class="gallery-content">
+      <img src="./assets/photographers/${idPic.photographerId}/${idPic.image}" alt="media: ${idPic.title}" /> 
+      <div class="gallery-details">
+        <h3>${idPic.title}</h3>
+        <div>
+        <span>${idPic.likes}</span>
+        <i class="fas fa-heart likes"></i>
+        </div>
+      </div>
+    </div>
+    `
+  );
 }
-
-const utils = {
-  displayModal: function () {
-    const modal = document.getElementById("contact_modal");
-    modal.style.display = "block";
-  },
-
-  closeModal: function () {
-    const modal = document.getElementById("contact_modal");
-    modal.style.display = "none";
-  },
-};
 
 getJson();
