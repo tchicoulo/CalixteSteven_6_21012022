@@ -1,5 +1,5 @@
 export default class LightBox {
-  constructor(arrayMedias, currentMedia = 0) {
+  constructor(arrayMedias = [], currentMedia = 0) {
     this.arrayMedias = arrayMedias;
     this.currentMedia = currentMedia;
   }
@@ -8,7 +8,12 @@ export default class LightBox {
 
   prev() {}
 
-  sortByPopularity() {}
+  sortByPopularity() {
+    let sortby = this.arrayMedias.sort(function (a, b) {
+      return a.likes - b.likes;
+    });
+    console.log(sortby);
+  }
 
   sortByDate() {}
 

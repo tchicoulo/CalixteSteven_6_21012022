@@ -1,5 +1,6 @@
 import { displayModal, closeModal } from "../utils/contactForm.js";
 import Display from "../factories/Display.js";
+import LightBox from "../factories/LightBox.js";
 
 let queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
@@ -32,25 +33,40 @@ function Banner(data) {
 }
 
 function Gallery(data) {
+  const buttonSort = document.getElementById("sort");
+
+  buttonSort.addEventListener("change", function (e) {
+    switch (e.target.value) {
+      case "popularity":
+        console.log("Popularity");
+        //
+        break;
+      case "date":
+        console.log("Date");
+        //
+        break;
+      case "title":
+        console.log("Title");
+        //
+        break;
+    }
+  });
+
   const gallery = document.querySelector(".gallery");
   const galleryId = data.filter(
     (idPics) => idPics.photographerId === idPhotograph
   );
-  console.log(galleryId);
-  gallery.innerHTML = galleryId.map(
-    (idPic) => `
-    <div class="gallery-content">
-      <img src="./assets/photographers/${idPic.photographerId}/${idPic.image}" alt="media: ${idPic.title}" /> 
-      <div class="gallery-details">
-        <h3>${idPic.title}</h3>
-        <div>
-        <span>${idPic.likes}</span>
-        <i class="fas fa-heart likes"></i>
-        </div>
-      </div>
-    </div>
-    `
-  );
+
+  // //console.log(galleryId);
+  // localStorage.setItem("galleryIdStorage", JSON.stringify(galleryId));
+  // const getGalleryIdStorage = localStorage.getItem("galleryIdStorage");
+
+  // //console.log(JSON.parse(getGalleryIdStorage));
+
+  const test = new LightBox(galleryId);
+  console.log(test.sortByPopularity());
+
+  gallery.innerHTML = galleryId.map((idPic) => Display.displayGallery(idPic));
 }
 
 getJson();

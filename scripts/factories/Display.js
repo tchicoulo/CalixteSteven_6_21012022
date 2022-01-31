@@ -34,4 +34,19 @@ export default class Display {
         </button>
     <img src="assets/photographers/Photographers ID Photos/${photographId.portrait}" alt="portrait de ${photographId.name}" />`;
   }
+
+  static displayGallery(idPic) {
+    return `
+    <div class="gallery-content">
+      <img src="./assets/photographers/${idPic.photographerId}/${idPic.image}" alt="media: ${idPic.title}" /> 
+      <div class="gallery-details">
+        <h3>${idPic.title}</h3>
+        <div>
+        <span>${idPic.likes}</span>
+        <i class="fas fa-heart likes"></i>
+        </div>
+      </div>
+    </div>
+    `;
+  }
 }
