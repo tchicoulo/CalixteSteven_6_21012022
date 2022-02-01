@@ -1,6 +1,6 @@
 import { displayModal, closeModal } from "../utils/contactForm.js";
 import Display from "../factories/Display.js";
-import LightBox from "../factories/LightBox.js";
+import GalleryOfPictures from "../factories/GalleryOfPictures.js";
 
 let queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
@@ -10,12 +10,12 @@ async function getJson() {
   await fetch("./data/photographers.json")
     .then((res) => res.json())
     .then((data) => {
-      Banner(data.photographers);
-      Gallery(data.media);
+      banner(data.photographers);
+      gallery(data.media);
     });
 }
 
-function Banner(data) {
+function banner(data) {
   const photographHeader = document.querySelector(".photograph-header");
 
   const photographersId = data.filter(
@@ -32,41 +32,62 @@ function Banner(data) {
   });
 }
 
-function Gallery(data) {
+function gallery(data) {
   const buttonSort = document.getElementById("sort");
-
-  buttonSort.addEventListener("change", function (e) {
-    switch (e.target.value) {
-      case "popularity":
-        console.log("Popularity");
-        //
-        break;
-      case "date":
-        console.log("Date");
-        //
-        break;
-      case "title":
-        console.log("Title");
-        //
-        break;
-    }
-  });
-
   const gallery = document.querySelector(".gallery");
+
   const galleryId = data.filter(
     (idPics) => idPics.photographerId === idPhotograph
   );
 
-  // //console.log(galleryId);
-  // localStorage.setItem("galleryIdStorage", JSON.stringify(galleryId));
-  // const getGalleryIdStorage = localStorage.getItem("galleryIdStorage");
+  const galleryUser = new GalleryOfPictures(galleryId);
 
-  // //console.log(JSON.parse(getGalleryIdStorage));
+  // Nombre total de likes ////////////
+  console.log(galleryId);
+  console.log("Total : " + galleryUser.counterOfLikes());
 
-  const test = new LightBox(galleryId);
-  console.log(test.sortByPopularity());
+  //Sort by
+  buttonSort.addEventListener("change", function (e) {
+    switch (e.target.value) {
+      case "popularity":
+        galleryUser.sortByPopularity();
 
-  gallery.innerHTML = galleryId.map((idPic) => Display.displayGallery(idPic));
+        gallery.innerHTML = galleryId.map((idPic) =>
+          Display.displayGallery(idPic)
+        );
+        //
+        break;
+      case "date":
+        galleryUser.sortByDate();
+
+        gallery.innerHTML = galleryId.map((idPic) =>
+          Display.displayGallery(idPic)
+        );
+        //
+        break;
+      case "title":
+        galleryUser.sortByTitle();
+
+        gallery.innerHTML = galleryId.map((idPic) => {
+          Display.displayGallery(idPic);
+        });
+        //
+        break;
+      default:
+        console.log(`Out of ${e.target.value}`);
+    }
+  });
+
+  // Display when page is loaded
+  galleryUser.sortByPopularity();
+  gallery.innerHTML = galleryId.map((idPic) => {
+    const results = Display.displayGallery(idPic);
+
+    const likes = document.querySelector(".likes");
+    console.log(likes);
+
+    return results;
+  });
 }
 
 getJson();

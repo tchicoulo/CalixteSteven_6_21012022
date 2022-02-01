@@ -49,4 +49,8 @@ export default class Display {
     </div>
     `;
   }
+
+  // static displayCounter {
+
+  // }
 }
