@@ -23,6 +23,8 @@ export default class Display {
     `;
   }
   static displayBanner(photographId) {
+    localStorage.setItem("namePhotograph", photographId.name);
+
     return `
     <div class='details-photograph'>
       <h1>${photographId.name}</h1>

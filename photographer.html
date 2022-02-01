@@ -18,27 +18,44 @@
     </header>
     <main id="main">
       <div class="photograph-header"></div>
-      <label for="sort">Trier par</label>
-      <select name="sort-by" id="sort">
-        <option value="popularity">Popularité</option>
-        <option value="date">Date</option>
-        <option value="title">Titre</option>
-      </select>
+
+      <div class="sort-by">
+        <label for="sort">Trier par</label>
+        <select name="sort-by" id="sort">
+          <option value="popularity">Popularité</option>
+          <option value="date">Date</option>
+          <option value="title">Titre</option>
+        </select>
+      </div>
+
       <div class="gallery"></div>
     </main>
-    <div id="contact_modal">
+    <div class="contact-modal">
       <div class="modal">
         <header>
-          <h2>Contactez-moi</h2>
+          <h2 class="form-name"></h2>
           <img src="assets/icons/close.svg" class="close-modal" />
         </header>
-        <form>
-          <div>
-            <label>Prénom</label>
-            <input />
-          </div>
-          <button class="btn-submit">Envoyer</button>
-        </form>
+        <div class="modal-body">
+          <form>
+            <label for="first">Prénom</label>
+            <input type="text" name="first" id="first" />
+            <div class="error-first"></div>
+            <br />
+            <label for="last">Nom</label>
+            <input type="text" name="last" id="last" />
+            <div class="error-last"></div>
+            <br />
+            <label for="mail">Email</label>
+            <input type="mail" name="mail" id="mail" />
+            <div class="error-mail"></div>
+            <br />
+            <label for="message">Votre message</label>
+            <textarea name="message" id="message"></textarea>
+
+            <button class="btn-submit">Envoyer</button>
+          </form>
+        </div>
       </div>
       <div class="counter">counter</div>
     </div>

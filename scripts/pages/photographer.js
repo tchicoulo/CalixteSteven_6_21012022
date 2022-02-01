@@ -6,6 +6,10 @@ let queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const idPhotograph = JSON.parse(urlParams.get("id"));
 
+//close modal
+const closeForm = document.querySelector(".close-modal");
+closeForm.addEventListener("click", closeModal);
+
 async function getJson() {
   await fetch("./data/photographers.json")
     .then((res) => res.json())
@@ -15,6 +19,7 @@ async function getJson() {
     });
 }
 
+// Banner photograph
 function banner(data) {
   const photographHeader = document.querySelector(".photograph-header");
 
@@ -32,6 +37,7 @@ function banner(data) {
   });
 }
 
+//Gallery of pictures
 function gallery(data) {
   const buttonSort = document.getElementById("sort");
   const gallery = document.querySelector(".gallery");
@@ -55,7 +61,6 @@ function gallery(data) {
         gallery.innerHTML = galleryId.map((idPic) =>
           Display.displayGallery(idPic)
         );
-        //
         break;
       case "date":
         galleryUser.sortByDate();
@@ -63,15 +68,13 @@ function gallery(data) {
         gallery.innerHTML = galleryId.map((idPic) =>
           Display.displayGallery(idPic)
         );
-        //
         break;
       case "title":
         galleryUser.sortByTitle();
 
-        gallery.innerHTML = galleryId.map((idPic) => {
-          Display.displayGallery(idPic);
-        });
-        //
+        gallery.innerHTML = galleryId.map((idPic) =>
+          Display.displayGallery(idPic)
+        );
         break;
       default:
         console.log(`Out of ${e.target.value}`);
