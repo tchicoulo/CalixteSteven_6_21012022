@@ -38,7 +38,7 @@ export default class Display {
   }
 
   static displayGallery(idPic) {
-    return `
+    const result = `
     <div class="gallery-content">
       <img src="./assets/photographers/${idPic.photographerId}/${idPic.image}" alt="media: ${idPic.title}" /> 
       <div class="gallery-details">
@@ -50,6 +50,8 @@ export default class Display {
       </div>
     </div>
     `;
+
+    return result;
   }
 
   // static displayCounter {

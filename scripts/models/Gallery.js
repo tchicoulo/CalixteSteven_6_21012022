@@ -1,12 +1,7 @@
-export default class GalleryOfPictures {
-  constructor(arrayMedias = [], currentMedia = 0) {
+export default class Gallery {
+  constructor(arrayMedias = []) {
     this.arrayMedias = arrayMedias;
-    this.currentMedia = currentMedia;
   }
-
-  next() {}
-
-  prev() {}
 
   sortByPopularity() {
     this.arrayMedias.sort(function (a, b) {

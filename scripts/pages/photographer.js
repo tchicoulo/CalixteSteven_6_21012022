@@ -1,6 +1,8 @@
 import { displayModal, closeModal } from "../utils/contactForm.js";
 import Display from "../factories/Display.js";
-import GalleryOfPictures from "../factories/GalleryOfPictures.js";
+import Gallery from "../models/Gallery.js";
+import MediasFactory from "../factories/MediasFactory.js";
+import Photo from "../models/Photo.js";
 
 let queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
@@ -46,7 +48,7 @@ function gallery(data) {
     (idPics) => idPics.photographerId === idPhotograph
   );
 
-  const galleryUser = new GalleryOfPictures(galleryId);
+  const galleryUser = new Gallery(galleryId);
 
   // Nombre total de likes ////////////
   console.log(galleryId);
@@ -86,10 +88,14 @@ function gallery(data) {
   gallery.innerHTML = galleryId.map((idPic) => {
     const results = Display.displayGallery(idPic);
 
-    const likes = document.querySelector(".likes");
-    console.log(likes);
-
     return results;
+  });
+  const likes = document.querySelectorAll(".likes");
+  // console.log($likes);
+  likes.forEach((like) => {
+    like.addEventListener("click", function () {
+      console.log(like);
+    });
   });
 }
 
