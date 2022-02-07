@@ -1,6 +1,6 @@
 import { displayModal, closeModal } from "../utils/contactForm.js";
 import Display from "../factories/Display.js";
-import Gallery from "../models/Gallery.js";
+import Photographer from "../models/Photographer.js";
 import MediasFactory from "../factories/MediasFactory.js";
 import Photo from "../models/Photo.js";
 
@@ -28,9 +28,12 @@ function banner(data) {
   const photographersId = data.filter(
     (photograph) => photograph.id === idPhotograph
   );
+
+  const bannerUser = new Photographer(photographersId);
+
   photographersId.map((photographId) => {
     const results = (photographHeader.innerHTML =
-      Display.displayBanner(photographId));
+      bannerUser.displayBanner(photographId));
 
     const btnContact = document.querySelector(".contact_button");
     btnContact.addEventListener("click", displayModal);
@@ -48,7 +51,7 @@ function gallery(data) {
     (idPics) => idPics.photographerId === idPhotograph
   );
 
-  const galleryUser = new Gallery(galleryId);
+  const galleryUser = new Photographer(galleryId);
 
   // Nombre total de likes ////////////
   console.log(galleryId);
@@ -61,21 +64,21 @@ function gallery(data) {
         galleryUser.sortByPopularity();
 
         gallery.innerHTML = galleryId.map((idPic) =>
-          Display.displayGallery(idPic)
+          galleryUser.displayGallery(idPic)
         );
         break;
       case "date":
         galleryUser.sortByDate();
 
         gallery.innerHTML = galleryId.map((idPic) =>
-          Display.displayGallery(idPic)
+          galleryUser.displayGallery(idPic)
         );
         break;
       case "title":
         galleryUser.sortByTitle();
 
         gallery.innerHTML = galleryId.map((idPic) =>
-          Display.displayGallery(idPic)
+          galleryUser.displayGallery(idPic)
         );
         break;
       default:
@@ -86,7 +89,7 @@ function gallery(data) {
   // Display when page is loaded
   galleryUser.sortByPopularity();
   gallery.innerHTML = galleryId.map((idPic) => {
-    const results = Display.displayGallery(idPic);
+    const results = galleryUser.displayGallery(idPic);
 
     return results;
   });

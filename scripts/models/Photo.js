@@ -1,12 +1,14 @@
 export default class Photo {
-  constructor(title, idPhotograph, img) {
-    this._title = title;
-    this._idPhotograph = idPhotograph;
-    this._img = img;
+  constructor(data) {
+    this._title = data.title;
+    this._idPhotograph = data.idPhotograph;
+    this._img = data.img;
   }
 
   display() {
-    const result = `<img src="./assets/photographers/${this.idPhotograph}/${this.img}" alt="media: ${this.title}" />`;
+    const result = `
+      <img 
+        src="./assets/photographers/${this.idPhotograph}/${this.img}"          alt="media: ${this.title}">`;
 
     return result;
   }
