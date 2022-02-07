@@ -1,23 +1,21 @@
 export default class BannerPhotograph {
-  constructor(photographId) {
-    this._photographId = photographId;
+  constructor(photograph) {
+    this._photograph = photograph;
   }
 
   createBannerPhotograph() {
-    localStorage.setItem("namePhotograph", photographId.name);
-
     const photographHeader = document.querySelector(".photograph-header");
 
     const bannerPhotograph = `
     <div class='details-photograph'>
-      <h1>${this.photographId.name}</h1>
-      <p>${this.photographId.city}, ${this.photographId.country}</p>
-      <span>${this.photographId.tagline}</span>
+      <h1>${this._photograph.name}</h1>
+      <p>${this._photograph.city}, ${this._photograph.country}</p>
+      <span>${this._photograph.tagline}</span>
     </div>
     <button class="contact_button">
           Contactez-moi
         </button>
-    <img src="assets/photographers/Photographers ID Photos/${this.photographId.portrait}" alt="portrait de ${this.photographId.name}" />`;
+    <img src="assets/photographers/Photographers ID Photos/${this._photograph.portrait}" alt="portrait de ${this._photograph.name}" />`;
 
     photographHeader.innerHTML = bannerPhotograph;
 

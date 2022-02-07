@@ -3,6 +3,7 @@ import Display from "../factories/Display.js";
 import Photographer from "../models/Photographer.js";
 import MediasFactory from "../factories/MediasFactory.js";
 import Photo from "../models/Photo.js";
+import BannerPhotograph from "../templates/BannerPhotograph.js";
 
 let queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
@@ -23,23 +24,18 @@ async function getJson() {
 
 // Banner photograph
 function banner(data) {
-  const photographHeader = document.querySelector(".photograph-header");
-
   const photographersId = data.filter(
     (photograph) => photograph.id === idPhotograph
   );
 
-  const bannerUser = new Photographer(photographersId);
-
   photographersId.map((photographId) => {
-    const results = (photographHeader.innerHTML =
-      bannerUser.displayBanner(photographId));
+    const template = new BannerPhotograph(photographId);
 
-    const btnContact = document.querySelector(".contact_button");
-    btnContact.addEventListener("click", displayModal);
-
-    return results;
+    return template.createBannerPhotograph();
   });
+
+  const btnContact = document.querySelector(".contact_button");
+  btnContact.addEventListener("click", displayModal);
 }
 
 //Gallery of pictures
