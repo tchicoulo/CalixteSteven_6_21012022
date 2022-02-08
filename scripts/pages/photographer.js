@@ -93,7 +93,13 @@ function gallery(data) {
   // console.log($likes);
   likes.forEach((like) => {
     like.addEventListener("click", function (e) {
-      console.log(this);
+      if (this.dataset.clicked) {
+        delete this.dataset.clicked;
+        console.log("-1");
+      } else {
+        this.dataset.clicked = true;
+        console.log("+1");
+      }
     });
   });
 }
