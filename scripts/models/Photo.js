@@ -5,10 +5,10 @@ export default class Photo {
     this._img = data.img;
   }
 
-  display() {
+  getImg() {
     const result = `
       <img 
-        src="./assets/photographers/${this.idPhotograph}/${this.img}"          alt="media: ${this.title}">`;
+        src="./assets/photographers/${this._idPhotograph}/${this._img}"          alt="media: ${this._title}">`;
 
     return result;
   }

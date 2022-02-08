@@ -1,39 +1,22 @@
 export default class Photographer {
-  constructor(arrayMedias = []) {
-    this.arrayMedias = arrayMedias;
-  }
-
-  displayBanner(photographId) {
-    localStorage.setItem("namePhotograph", photographId.name);
-
-    const result = `
-    <div class='details-photograph'>
-      <h1>${photographId.name}</h1>
-      <p>${photographId.city}, ${photographId.country}</p>
-      <span>${photographId.tagline}</span>
-    </div>
-    <button class="contact_button">
-          Contactez-moi
-        </button>
-    <img src="assets/photographers/Photographers ID Photos/${photographId.portrait}" alt="portrait de ${photographId.name}" />`;
-
-    return result;
+  constructor(arrayMedias) {
+    this._arrayMedias = arrayMedias;
   }
 
   sortByPopularity() {
-    this.arrayMedias.sort(function (a, b) {
+    this._arrayMedias.sort(function (a, b) {
       return b.likes - a.likes;
     });
   }
 
   sortByDate() {
-    this.arrayMedias.sort(function (a, b) {
+    this._arrayMedias.sort(function (a, b) {
       return new Date(b.date) - new Date(a.date);
     });
   }
 
   sortByTitle() {
-    this.arrayMedias.sort(function (a, b) {
+    this._arrayMedias.sort(function (a, b) {
       return a.title.localeCompare(b.title);
     });
   }
@@ -59,9 +42,13 @@ export default class Photographer {
   //total of likes
   counterOfLikes() {
     let initialValue = 0;
-    let total = this.arrayMedias.reduce(function (acc, val) {
+    let total = this._arrayMedias.reduce(function (acc, val) {
       return acc + val.likes;
     }, initialValue);
     return total;
+  }
+
+  displaycounter() {
+    const counter = document.querySelector(".counter");
   }
 }

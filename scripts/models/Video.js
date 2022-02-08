@@ -5,13 +5,13 @@ export default class Video {
     this._video = data.video;
   }
 
-  display() {
+  getVideo() {
     const result = `
       <video 
         <video controls>
           <source 
-            src="./assets/photographers/${this.idPhotograph}/${this.video}"
-            alt="media: ${this.title}"
+            src="./assets/photographers/${this._idPhotograph}/${this._video}"
+            alt="media: ${this._title}"
             type="video/mp4">
         </video>
         `;

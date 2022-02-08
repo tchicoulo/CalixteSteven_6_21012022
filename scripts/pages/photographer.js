@@ -1,9 +1,9 @@
 import { displayModal, closeModal } from "../utils/contactForm.js";
-import Display from "../factories/Display.js";
 import Photographer from "../models/Photographer.js";
+import BannerPhotograph from "../templates/BannerPhotograph.js";
 import MediasFactory from "../factories/MediasFactory.js";
 import Photo from "../models/Photo.js";
-import BannerPhotograph from "../templates/BannerPhotograph.js";
+import Video from "../models/Video.js";
 
 let queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
@@ -30,7 +30,6 @@ function banner(data) {
 
   photographersId.map((photographId) => {
     const template = new BannerPhotograph(photographId);
-
     return template.createBannerPhotograph();
   });
 
@@ -89,11 +88,12 @@ function gallery(data) {
 
     return results;
   });
+
   const likes = document.querySelectorAll(".likes");
   // console.log($likes);
   likes.forEach((like) => {
-    like.addEventListener("click", function () {
-      console.log(like);
+    like.addEventListener("click", function (e) {
+      console.log(this);
     });
   });
 }

@@ -1,4 +1,4 @@
-import Display from "../factories/Display.js";
+import BannerPhotographers from "../templates/BannerPhotographers.js";
 
 async function getPhotographers() {
   // Penser à remplacer par les données récupérées dans le json
@@ -12,11 +12,10 @@ async function getPhotographers() {
 }
 
 function displayData(photographers) {
-  const photographersSection = document.querySelector(".photographer_section");
-
-  photographersSection.innerHTML = photographers.map((photographer) =>
-    Display.displayPhotographers(photographer)
-  );
+  photographers.map((photographer) => {
+    const template = new BannerPhotographers(photographer);
+    return template.createBannerPhotographers();
+  });
 }
 
 async function init() {
