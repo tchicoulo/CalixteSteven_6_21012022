@@ -1,0 +1,103 @@
+.lightbox-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow: auto;
+  background-color: #e5e5e5;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  animation: lightboxIn 0.5s;
+  transition: opacity 0.3s;
+}
+
+.lightbox {
+  width: 1253px;
+  height: 984px;
+  z-index: 10;
+  position: relative;
+}
+
+.lightbox-modal.fadeOut {
+  opacity: 0;
+}
+
+.lightbox-next,
+.lightbox-prev {
+  border: none;
+  background: url(../assets/icons/arrow.svg) center center / 29px 48px no-repeat;
+  width: 30px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 40px;
+  z-index: 11;
+  opacity: 0.5;
+  text-indent: -3000px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.lightbox-next {
+  right: 40px;
+  left: auto;
+  transform: rotate(180deg);
+}
+
+.lightbox-close {
+  width: 42px;
+  height: 42px;
+  border: none;
+  position: absolute;
+  background: url('data:image/svg+xml;utf8,<svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M42 4.23L37.77 0L21 16.77L4.23 0L0 4.23L16.77 21L0 37.77L4.23 42L21 25.23L37.77 42L42 37.77L25.23 21L42 4.23Z" fill="%23901C1C"/></svg>')
+    center center / 42px 42px no-repeat transparent;
+  color: #901c1c;
+  z-index: 12;
+  top: 37px;
+  right: 40px;
+  text-indent: 11000px;
+}
+
+.lightbox-container {
+  margin-top: 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lightbox-container img {
+  border-radius: 5px;
+  width: 1050px;
+  height: 900px;
+  object-fit: cover;
+  animation: lightboxIn 0.5s;
+}
+
+.lightbox-container h3 {
+  margin-top: 10px;
+  width: 1050px;
+  text-align: left;
+  color: #901c1c;
+}
+
+.lightbox button {
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.lightbox button:hover {
+  opacity: 1;
+}
+
+@keyframes lightboxIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

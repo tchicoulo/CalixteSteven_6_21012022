@@ -1,6 +1,6 @@
 import { displayModal, closeModal } from "../utils/contactForm.js";
-import Photographer from "../models/Photographer.js";
 import BannerPhotograph from "../templates/BannerPhotograph.js";
+import Photographer from "../models/Photographer.js";
 import MediasFactory from "../factories/MediasFactory.js";
 import Photo from "../models/Photo.js";
 import Video from "../models/Video.js";
