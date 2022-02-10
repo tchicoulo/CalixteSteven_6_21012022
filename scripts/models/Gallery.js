@@ -1,4 +1,6 @@
-export default class Photographer {
+import MediasFactory from "../factories/MediasFactory.js";
+
+export default class Gallery {
   constructor(arrayMedias) {
     this._arrayMedias = arrayMedias;
   }
@@ -21,15 +23,26 @@ export default class Photographer {
     });
   }
 
+  displayGallery() {
+    const result = this._arrayMedias
+      .map((media) => {
+        return this.displayMedias(media);
+      })
+      .join("");
+    return result;
+  }
+
   //Gallery of pictures
-  displayGallery(idPic) {
+  displayMedias(media) {
+    const mediaDOM = new MediasFactory(media);
+
     const result = `
     <div class="gallery-content">
-      <img src="./assets/photographers/${idPic.photographerId}/${idPic.image}" alt="media: ${idPic.title}" /> 
+      ${mediaDOM.display()}
       <div class="gallery-details">
-        <h3>${idPic.title}</h3>
+        <h3>${media.title}</h3>
         <div>
-        <span>${idPic.likes}</span>
+        <span>${media.likes}</span>
         <i class="fas fa-heart likes"></i>
         </div>
       </div>

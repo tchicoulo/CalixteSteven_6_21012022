@@ -21,6 +21,13 @@
   position: relative;
 }
 
+.lightbox-loader {
+  width: 1050px;
+  height: 900px;
+  opacity: 0.5;
+  background: url(../assets/icons/loader.svg) center center no-repeat;
+}
+
 .lightbox-modal.fadeOut {
   opacity: 0;
 }

@@ -1,6 +1,7 @@
 /**
  * @property {HTMLElement} element
  * @property {String[]} gallery Chemins des images de la lightbox
+ * @param {String} url Image actuellement affiché
  */
 
 export default class Lightbox {
@@ -27,10 +28,32 @@ export default class Lightbox {
    */
   constructor(url, gallery) {
     this.element = this.buildDOM(url);
+    this.loadImage(url);
     this.gallery = gallery;
     this.onKeyUp = this.onKeyUp.bind(this);
     document.body.appendChild(this.element);
     document.addEventListener("keyup", this.onKeyUp);
+  }
+
+  /**
+   *
+   * @param {string} url URL de l'image et de la video
+   */
+
+  loadImage(url) {
+    this.url = null;
+    const image = new Image();
+    const container = this.element.querySelector(".lightbox-container");
+    const loader = document.createElement("div");
+    loader.classList.add("lightbox-loader");
+    container.innerHTML = "";
+    container.appendChild(loader);
+    image.onload = () => {
+      container.removeChild(loader);
+      container.appendChild(image);
+      this.url = url;
+    };
+    image.src = url;
   }
 
   /**
@@ -41,6 +64,12 @@ export default class Lightbox {
   onKeyUp(e) {
     if (e.key === "Escape") {
       this.close(e);
+    }
+    if (e.key === "ArrowLeft") {
+      this.prev(e);
+    }
+    if (e.key === "ArrowRight") {
+      this.next(e);
     }
   }
 
@@ -63,13 +92,27 @@ export default class Lightbox {
    * @param {MouseEvent|KeyboardEvent} e
    */
 
-  next(e) {}
+  next(e) {
+    e.preventDefault();
+    let i = this.gallery.findIndex((image) => image === this.url);
+    if (i === this.gallery.length - 1) {
+      i = -1;
+    }
+    this.loadImage(this.gallery[i + 1]);
+  }
 
   /**
    * @param {MouseEvent|KeyboardEvent} e
    */
 
-  prev(e) {}
+  prev(e) {
+    e.preventDefault();
+    let i = this.gallery.findIndex((image) => image === this.url);
+    if (i === 0) {
+      i = this.gallery.length;
+    }
+    this.loadImage(this.gallery[i - 1]);
+  }
 
   /**
    * @param {string} url URL de l'image et de la video
@@ -83,10 +126,8 @@ export default class Lightbox {
         <button class="lightbox-close">Fermer</button>
         <button class="lightbox-next">Suivant</button>
         <button class="lightbox-prev">précédent</button>
-        <div class="lightbox-container">
-          <img src="${url}" alt="" />
-          <h3>Nom de l'image</h3>
-        </div>
+        <div class="lightbox-container"></div>
+        <h3>Nom de l'image</h3>
       </div>`;
     dom
       .querySelector(".lightbox-close")

@@ -1,6 +1,6 @@
 import { displayModal, closeModal } from "../utils/contactForm.js";
 import BannerPhotograph from "../templates/BannerPhotograph.js";
-import Photographer from "../models/Photographer.js";
+import Gallery from "../models/Gallery.js";
 import MediasFactory from "../factories/MediasFactory.js";
 import Photo from "../models/Photo.js";
 import Video from "../models/Video.js";
@@ -24,14 +24,11 @@ async function getJson() {
 
 // Banner photograph
 function banner(data) {
-  const photographersId = data.filter(
+  const photographer = data.filter(
     (photograph) => photograph.id === idPhotograph
-  );
+  )[0];
 
-  photographersId.map((photographId) => {
-    const template = new BannerPhotograph(photographId);
-    return template.createBannerPhotograph();
-  });
+  new BannerPhotograph(photographer);
 
   const btnContact = document.querySelector(".contact_button");
   btnContact.addEventListener("click", displayModal);
@@ -42,14 +39,14 @@ function gallery(data) {
   const buttonSort = document.getElementById("sort");
   const gallery = document.querySelector(".gallery");
 
-  const galleryId = data.filter(
+  const galleryMedias = data.filter(
     (idPics) => idPics.photographerId === idPhotograph
   );
 
-  const galleryUser = new Photographer(galleryId);
+  const galleryUser = new Gallery(galleryMedias);
 
   // Nombre total de likes ////////////
-  console.log(galleryId);
+  console.log(galleryMedias);
   console.log("Total : " + galleryUser.counterOfLikes());
 
   //Sort by
@@ -58,22 +55,22 @@ function gallery(data) {
       case "popularity":
         galleryUser.sortByPopularity();
 
-        gallery.innerHTML = galleryId.map((idPic) =>
-          galleryUser.displayGallery(idPic)
+        gallery.innerHTML = galleryMedias.map((media) =>
+          galleryUser.displayGallery(media)
         );
         break;
       case "date":
         galleryUser.sortByDate();
 
-        gallery.innerHTML = galleryId.map((idPic) =>
-          galleryUser.displayGallery(idPic)
+        gallery.innerHTML = galleryMedias.map((media) =>
+          galleryUser.displayGallery(media)
         );
         break;
       case "title":
         galleryUser.sortByTitle();
 
-        gallery.innerHTML = galleryId.map((idPic) =>
-          galleryUser.displayGallery(idPic)
+        gallery.innerHTML = galleryMedias.map((media) =>
+          galleryUser.displayGallery(media)
         );
         break;
       default:
@@ -83,11 +80,7 @@ function gallery(data) {
 
   // Display when page is loaded
   galleryUser.sortByPopularity();
-  gallery.innerHTML = galleryId.map((idPic) => {
-    const results = galleryUser.displayGallery(idPic);
-
-    return results;
-  });
+  gallery.innerHTML = galleryUser.displayGallery();
 
   const likes = document.querySelectorAll(".likes");
   // console.log($likes);

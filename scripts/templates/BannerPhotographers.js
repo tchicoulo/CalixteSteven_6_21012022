@@ -12,7 +12,7 @@ export default class BannerPhotographers {
     <article>
       <a href="./photographer.html?id=${this._photographers.id}"><div>
         <img
-          src="./assets/photographers/Photographers ID Photos/${
+          src="./assets/photographers/PhotographersIDPhotos/${
             this._photographers.portrait
           }"
           alt="Aller sur la page photographe du nom de ${

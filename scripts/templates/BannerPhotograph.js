@@ -1,6 +1,7 @@
 export default class BannerPhotograph {
   constructor(photograph) {
     this._photograph = photograph;
+    this.createBannerPhotograph();
   }
 
   createBannerPhotograph() {
@@ -15,7 +16,7 @@ export default class BannerPhotograph {
     <button class="contact_button">
           Contactez-moi
         </button>
-    <img src="assets/photographers/Photographers ID Photos/${this._photograph.portrait}" alt="portrait de ${this._photograph.name}" />`;
+    <img src="assets/photographers/PhotographersIDPhotos/${this._photograph.portrait}" alt="portrait de ${this._photograph.name}" />`;
 
     photographHeader.innerHTML = bannerPhotograph;
 
