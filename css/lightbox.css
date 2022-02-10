@@ -75,7 +75,8 @@
   align-items: center;
 }
 
-.lightbox-container img {
+.lightbox-container img,
+.lightbox-container video {
   border-radius: 5px;
   width: 1050px;
   height: 900px;

@@ -11,6 +11,7 @@ export default class Lightbox {
         ".gallery-content > img[src$='.jpg'], .gallery-content > video source[src$='.mp4']"
       )
     );
+    console.log(links);
     const gallery = links.map((link) => link.getAttribute("src"));
 
     links.forEach((link) =>
@@ -28,7 +29,7 @@ export default class Lightbox {
    */
   constructor(url, gallery) {
     this.element = this.buildDOM(url);
-    this.loadImage(url);
+    this.loadMedia(url);
     this.gallery = gallery;
     this.onKeyUp = this.onKeyUp.bind(this);
     document.body.appendChild(this.element);
@@ -40,7 +41,7 @@ export default class Lightbox {
    * @param {string} url URL de l'image et de la video
    */
 
-  loadImage(url) {
+  loadMedia(url) {
     this.url = null;
     const image = new Image();
     const container = this.element.querySelector(".lightbox-container");
@@ -94,11 +95,11 @@ export default class Lightbox {
 
   next(e) {
     e.preventDefault();
-    let i = this.gallery.findIndex((image) => image === this.url);
+    let i = this.gallery.findIndex((media) => media === this.url);
     if (i === this.gallery.length - 1) {
       i = -1;
     }
-    this.loadImage(this.gallery[i + 1]);
+    this.loadMedia(this.gallery[i + 1]);
   }
 
   /**
@@ -107,11 +108,11 @@ export default class Lightbox {
 
   prev(e) {
     e.preventDefault();
-    let i = this.gallery.findIndex((image) => image === this.url);
+    let i = this.gallery.findIndex((media) => media === this.url);
     if (i === 0) {
       i = this.gallery.length;
     }
-    this.loadImage(this.gallery[i - 1]);
+    this.loadMedia(this.gallery[i - 1]);
   }
 
   /**
