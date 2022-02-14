@@ -6,21 +6,26 @@
 
 export default class Lightbox {
   static init() {
-    const links = Array.from(
-      document.querySelectorAll(
-        ".gallery-content > img[src$='.jpg'], .gallery-content > video source[src$='.mp4']"
-      )
-    );
-    console.log(links);
-    const gallery = links.map((link) => link.getAttribute("src"));
+    setTimeout(() => {
+      const links = Array.from(
+        document.querySelectorAll(
+          ".gallery-content > img[src$='.jpg'], .gallery-content > video source[src$='.mp4']"
+        )
+      );
 
-    links.forEach((link) =>
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
+      const gallery = links.map((link) => link.getAttribute("src"));
 
-        new Lightbox(e.currentTarget.getAttribute("src"), gallery);
-      })
-    );
+      // const titlesImg = Array.from(document.querySelectorAll("h3")).map((title) => title.outerText);
+      // const Titles = titlesImg;
+
+      links.forEach((link) =>
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+
+          new Lightbox(e.currentTarget.getAttribute("src"), gallery);
+        })
+      );
+    }, 1500);
   }
 
   /**
@@ -128,7 +133,7 @@ export default class Lightbox {
         <button class="lightbox-next">Suivant</button>
         <button class="lightbox-prev">précédent</button>
         <div class="lightbox-container"></div>
-        <h3>Nom de l'image</h3>
+        <h3>${url.split("/")[4].split(".")[0]}</h3>
       </div>`;
     dom
       .querySelector(".lightbox-close")
@@ -143,6 +148,4 @@ export default class Lightbox {
   }
 }
 
-setTimeout(() => {
-  Lightbox.init();
-}, 3000);
+Lightbox.init();

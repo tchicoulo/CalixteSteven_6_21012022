@@ -1,9 +1,7 @@
 import { displayModal, closeModal } from "../utils/contactForm.js";
 import BannerPhotograph from "../templates/BannerPhotograph.js";
 import Gallery from "../models/Gallery.js";
-import MediasFactory from "../factories/MediasFactory.js";
-import Photo from "../models/Photo.js";
-import Video from "../models/Video.js";
+import Lightbox from "../models/Lightbox.js";
 
 let queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
@@ -45,49 +43,45 @@ function gallery(data) {
 
   const galleryUser = new Gallery(galleryMedias);
 
-  // Nombre total de likes ////////////
-  console.log(galleryMedias);
-  console.log("Total : " + galleryUser.counterOfLikes());
-
   //Sort by
   buttonSort.addEventListener("change", function (e) {
     switch (e.target.value) {
       case "popularity":
         galleryUser.sortByPopularity();
-
-        gallery.innerHTML = galleryMedias.map((media) =>
-          galleryUser.displayGallery(media)
-        );
+        Lightbox.init();
+        gallery.innerHTML = galleryUser.displayGallery();
         break;
+
       case "date":
         galleryUser.sortByDate();
-
-        gallery.innerHTML = galleryMedias.map((media) =>
-          galleryUser.displayGallery(media)
-        );
+        Lightbox.init();
+        gallery.innerHTML = galleryUser.displayGallery();
         break;
+
       case "title":
         galleryUser.sortByTitle();
-
-        gallery.innerHTML = galleryMedias.map((media) =>
-          galleryUser.displayGallery(media)
-        );
+        Lightbox.init();
+        gallery.innerHTML = galleryUser.displayGallery();
         break;
       default:
         console.log(`Out of ${e.target.value}`);
     }
   });
 
+  // Nombre total de likes ////////////
+  console.log("Total : " + galleryUser.counterOfLikes());
+
   // Display when page is loaded
   galleryUser.sortByPopularity();
   gallery.innerHTML = galleryUser.displayGallery();
 
-  const likes = document.querySelectorAll(".likes");
-  // console.log($likes);
-  likes.forEach((like) => {
+  const likesIcons = document.querySelectorAll(".fa-heart");
+
+  likesIcons.forEach((like) => {
     like.addEventListener("click", function (e) {
       if (this.dataset.clicked) {
         delete this.dataset.clicked;
+
         console.log("-1");
       } else {
         this.dataset.clicked = true;

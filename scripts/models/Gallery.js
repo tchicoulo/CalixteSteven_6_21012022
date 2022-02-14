@@ -42,8 +42,8 @@ export default class Gallery {
       <div class="gallery-details">
         <h3>${media.title}</h3>
         <div>
-        <span>${media.likes}</span>
-        <i class="fas fa-heart likes"></i>
+        <span class="likes">${media.likes}</span>
+        <i class="fas fa-heart"></i>
         </div>
       </div>
     </div>
@@ -59,9 +59,5 @@ export default class Gallery {
       return acc + val.likes;
     }, initialValue);
     return total;
-  }
-
-  displaycounter() {
-    const counter = document.querySelector(".counter");
   }
 }
