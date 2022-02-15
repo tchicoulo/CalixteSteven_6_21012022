@@ -1,4 +1,4 @@
-import { displayModal, closeModal } from "../utils/contactForm.js";
+import Form from "../utils/contactForm.js";
 import BannerPhotograph from "../templates/BannerPhotograph.js";
 import Gallery from "../models/Gallery.js";
 import Lightbox from "../models/Lightbox.js";
@@ -6,10 +6,6 @@ import Lightbox from "../models/Lightbox.js";
 let queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const idPhotograph = JSON.parse(urlParams.get("id"));
-
-//close modal
-const closeForm = document.querySelector(".close-modal");
-closeForm.addEventListener("click", closeModal);
 
 async function getJson() {
   await fetch("./data/photographers.json")
@@ -29,7 +25,7 @@ function banner(data) {
   new BannerPhotograph(photographer);
 
   const btnContact = document.querySelector(".contact_button");
-  btnContact.addEventListener("click", displayModal);
+  btnContact.addEventListener("click", Form.displayModal);
 }
 
 //Gallery of pictures

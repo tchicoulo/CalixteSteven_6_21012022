@@ -20,6 +20,9 @@ export default class BannerPhotograph {
 
     photographHeader.innerHTML = bannerPhotograph;
 
+    let name = document.querySelector("h1");
+    localStorage.setItem("namePhotograph", name.textContent);
+
     return photographHeader;
   }
 }
