@@ -15,7 +15,11 @@ export default class Lightbox {
 
       const gallery = links.map((link) => link.getAttribute("src"));
 
-      // const titlesImg = Array.from(document.querySelectorAll("h3")).map((title) => title.outerText);
+      console.log(links);
+
+      // const titlesImg = Array.from(document.querySelectorAll("h3")).map(
+      //   (title) => title.outerText
+      // );
       // const Titles = titlesImg;
 
       links.forEach((link) =>
@@ -47,6 +51,22 @@ export default class Lightbox {
    */
 
   loadMedia(url) {
+    this.url = null;
+    const image = new Image();
+    const container = this.element.querySelector(".lightbox-container");
+    const loader = document.createElement("div");
+    loader.classList.add("lightbox-loader");
+    container.innerHTML = "";
+    container.appendChild(loader);
+    image.onload = () => {
+      container.removeChild(loader);
+      container.appendChild(image);
+      this.url = url;
+    };
+    image.src = url;
+  }
+
+  loadImage(url) {
     this.url = null;
     const image = new Image();
     const container = this.element.querySelector(".lightbox-container");

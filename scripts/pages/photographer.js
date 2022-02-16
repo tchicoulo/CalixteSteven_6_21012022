@@ -18,9 +18,13 @@ async function getJson() {
 
 // Banner photograph
 function banner(data) {
+  //find photograph with Id
   const photographer = data.filter(
     (photograph) => photograph.id === idPhotograph
   )[0];
+
+  //Save price of the photograph per hours
+  localStorage.setItem("prix/heure", Math.round(photographer.price / 7));
 
   new BannerPhotograph(photographer);
 
@@ -65,26 +69,46 @@ function gallery(data) {
   });
 
   // Nombre total de likes ////////////
-  console.log("Total : " + galleryUser.counterOfLikes());
+  // console.log("Total : " + galleryUser.counterOfLikes());
+  const totalLikes = galleryUser.counterOfLikes();
 
   // Display when page is loaded
   galleryUser.sortByPopularity();
   gallery.innerHTML = galleryUser.displayGallery();
 
-  const likesIcons = document.querySelectorAll(".fa-heart");
+  const heartIcons = document.querySelectorAll(".fa-heart");
 
-  likesIcons.forEach((like) => {
-    like.addEventListener("click", function (e) {
+  addLike(heartIcons, totalLikes);
+}
+
+function addLike(heartIcons, totalLikes) {
+  heartIcons.forEach((heart) => {
+    heart.addEventListener("click", function (e) {
+      const like = heart.parentElement.querySelector(".likes");
+      let countLike = parseInt(like.textContent);
+
       if (this.dataset.clicked) {
         delete this.dataset.clicked;
+        countLike--;
+        totalLikes--;
 
         console.log("-1");
       } else {
         this.dataset.clicked = true;
         console.log("+1");
+        countLike++;
+        totalLikes++;
       }
+      like.textContent = countLike;
+      console.log(totalLikes);
     });
   });
 }
 
+function counterDisplay() {
+  const counter = document.querySelector(".counter");
+  // counter.innerHTML =
+}
+
+counterDisplay();
 getJson();

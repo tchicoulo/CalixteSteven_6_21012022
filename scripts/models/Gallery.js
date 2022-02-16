@@ -48,7 +48,6 @@ export default class Gallery {
       </div>
     </div>
     `;
-
     return result;
   }
 

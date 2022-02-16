@@ -102,6 +102,31 @@ option {
   justify-content: space-between;
 }
 
+.likes {
+  font-weight: bold;
+}
+
+/* COUNTER LIKES */
+
+.counter {
+  width: 376px;
+  height: 89px;
+  background: #db8876;
+  border-radius: 5px;
+  position: fixed;
+  right: 30px;
+  bottom: -13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.total,
+.price {
+  font-weight: bold;
+  font-size: 24px;
+}
+
 /* FORM */
 
 .contact-modal {
