@@ -211,6 +211,8 @@ form input {
   height: 68px;
   border: none;
   border-radius: 5px;
+  font-size: 25px;
+  padding: 0 10px;
 }
 
 form textarea {

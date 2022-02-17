@@ -35,13 +35,13 @@ function banner(data) {
 //Gallery of pictures
 function gallery(data) {
   const buttonSort = document.getElementById("sort");
-  const gallery = document.querySelector(".gallery");
 
   const galleryMedias = data.filter(
     (idPics) => idPics.photographerId === idPhotograph
   );
 
   const galleryUser = new Gallery(galleryMedias);
+  console.log(galleryUser);
 
   //Sort by
   buttonSort.addEventListener("change", function (e) {
@@ -49,19 +49,21 @@ function gallery(data) {
       case "popularity":
         galleryUser.sortByPopularity();
         Lightbox.init();
-        gallery.innerHTML = galleryUser.displayGallery();
+        galleryUser.displayGallery();
         break;
 
       case "date":
         galleryUser.sortByDate();
         Lightbox.init();
-        gallery.innerHTML = galleryUser.displayGallery();
+        galleryUser.displayGallery();
         break;
 
       case "title":
         galleryUser.sortByTitle();
         Lightbox.init();
-        gallery.innerHTML = galleryUser.displayGallery();
+        galleryUser.displayGallery();
+
+        // Like(heartIcons);
         break;
       default:
         console.log(`Out of ${e.target.value}`);
@@ -71,44 +73,12 @@ function gallery(data) {
   // Nombre total de likes ////////////
   // console.log("Total : " + galleryUser.counterOfLikes());
   const totalLikes = galleryUser.counterOfLikes();
+  localStorage.setItem("totalLikes", totalLikes);
 
   // Display when page is loaded
   galleryUser.sortByPopularity();
-  gallery.innerHTML = galleryUser.displayGallery();
-
-  const heartIcons = document.querySelectorAll(".fa-heart");
-
-  addLike(heartIcons, totalLikes);
+  galleryUser.displayGallery();
+  Gallery.counterDisplay();
 }
 
-function addLike(heartIcons, totalLikes) {
-  heartIcons.forEach((heart) => {
-    heart.addEventListener("click", function (e) {
-      const like = heart.parentElement.querySelector(".likes");
-      let countLike = parseInt(like.textContent);
-
-      if (this.dataset.clicked) {
-        delete this.dataset.clicked;
-        countLike--;
-        totalLikes--;
-
-        console.log("-1");
-      } else {
-        this.dataset.clicked = true;
-        console.log("+1");
-        countLike++;
-        totalLikes++;
-      }
-      like.textContent = countLike;
-      console.log(totalLikes);
-    });
-  });
-}
-
-function counterDisplay() {
-  const counter = document.querySelector(".counter");
-  // counter.innerHTML =
-}
-
-counterDisplay();
 getJson();

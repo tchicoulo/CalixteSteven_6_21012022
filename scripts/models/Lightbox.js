@@ -157,13 +157,13 @@ export default class Lightbox {
       </div>`;
     dom
       .querySelector(".lightbox-close")
-      .addEventListener("click", this.close.bind(this));
+      .addEventListener("click", (e) => this.close(e));
     dom
       .querySelector(".lightbox-next")
-      .addEventListener("click", this.next.bind(this));
+      .addEventListener("click", (e) => this.next(e));
     dom
       .querySelector(".lightbox-prev")
-      .addEventListener("click", this.prev.bind(this));
+      .addEventListener("click", (e) => this.prev(e));
     return dom;
   }
 }

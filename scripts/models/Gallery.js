@@ -24,12 +24,56 @@ export default class Gallery {
   }
 
   displayGallery() {
-    const result = this._arrayMedias
+    const gallery = document.querySelector(".gallery");
+
+    gallery.innerHTML = this._arrayMedias
       .map((media) => {
         return this.displayMedias(media);
       })
       .join("");
-    return result;
+    gallery
+      .querySelectorAll(".fa-heart")
+      .forEach((heart) => heart.addEventListener("click", (e) => this.like(e)));
+    return gallery;
+  }
+
+  like(e) {
+    //Search Balise with number of likes
+    let likeSelector = e.path[1].querySelector(".likes");
+
+    let likeContent = parseInt(likeSelector.innerText);
+    console.log(likeContent);
+
+    // Total likes in localStorage
+    let totalLikes = localStorage.getItem("totalLikes");
+    totalLikes = parseInt(totalLikes);
+
+    if (e.target.dataset.clicked) {
+      delete e.target.dataset.clicked;
+      likeContent--;
+      likeSelector.textContent = likeContent;
+      totalLikes = localStorage.setItem("totalLikes", totalLikes - 1);
+
+      Gallery.counterDisplay();
+    } else {
+      e.target.dataset.clicked = true;
+      likeContent++;
+      likeSelector.textContent = likeContent;
+      totalLikes = localStorage.setItem("totalLikes", totalLikes + 1);
+
+      Gallery.counterDisplay();
+    }
+  }
+
+  static counterDisplay() {
+    const counter = document.querySelector(".counter");
+
+    counter.innerHTML = `
+      <div class="container">
+        <span class="total">${localStorage.getItem("totalLikes")}</span>
+        <img src="./assets/icons/heart.svg" alt="Icon of likes" />
+      </div>
+      <span class="price">${localStorage.getItem("prix/heure")}€/heure</span>`;
   }
 
   //Gallery of pictures
@@ -48,6 +92,7 @@ export default class Gallery {
       </div>
     </div>
     `;
+
     return result;
   }
 
