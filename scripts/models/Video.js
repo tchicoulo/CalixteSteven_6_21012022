@@ -7,9 +7,8 @@ export default class Video {
 
   getMedia() {
     const result = `
-      <video 
-        <video controls>
-          <source 
+      <video>
+          <source data-title="${this._title}"
             src="./assets/photographers/${this._idPhotograph}/${this._video}"
             alt="media: ${this._title}"
             type="video/mp4">
