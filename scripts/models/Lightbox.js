@@ -17,11 +17,13 @@ export default class Lightbox {
 
       // const gallery = medias.map((media) => media.getAttribute("src"));
 
-      medias.forEach((media) =>
+      medias.forEach((media, index) =>
         media.addEventListener("click", (e) => {
           e.preventDefault();
 
-          new Lightbox(e.currentTarget.getAttribute("src"), medias);
+          console.log(media, index);
+
+          new Lightbox(index, medias);
         })
       );
     }, 1500);
@@ -29,15 +31,15 @@ export default class Lightbox {
 
   /**
    * @param {String} url URL de l'image et de la video
-   * @param {String[]} gallery Chemins des images de la lightbox
+   * @param {String[]} medias Chemins des images de la lightbox
    */
-  constructor(url, gallery) {
-    this.gallery = gallery;
-    this.url = url;
-    let i = this.gallery.findIndex(
-      (media) => media.getAttribute("src") === this.url
-    );
-    let media = this.gallery[i];
+  constructor(index, medias) {
+    this.medias = medias;
+    this.i = index;
+    // let i = this.gallery.findIndex(
+    //   (media) => media.getAttribute("src") === this.url
+    // );
+    let media = this.medias[this.i];
     this.element = this.buildDOM();
     this.loadMedia(media);
     this.onKeyUp = this.onKeyUp.bind(this);
@@ -51,8 +53,6 @@ export default class Lightbox {
    */
 
   loadMedia(media) {
-    this.url = null;
-    const image = new Image();
     const container = this.element.querySelector(".lightbox-container");
     const loader = document.createElement("div");
     loader.classList.add("lightbox-loader");
@@ -60,12 +60,9 @@ export default class Lightbox {
     container.appendChild(loader);
     console.log(media);
 
-    image.onload = () => {
-      container.removeChild(loader);
-      container.appendChild(media);
-      this.url = media.getAttribute("src");
-    };
-    image.src = media.getAttribute("src");
+    container.removeChild(loader);
+    //
+    container.innerHTML = media.outerHTML;
   }
 
   /**
