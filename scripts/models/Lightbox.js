@@ -33,14 +33,16 @@ export default class Lightbox {
    */
   constructor(index, medias) {
     this.medias = medias;
+
     this.i = index;
     let media = this.medias[this.i];
 
     this.element = this.buildDOM(media);
     this.loadMedia(media);
+
     this.onKeyUp = this.onKeyUp.bind(this);
     document.body.appendChild(this.element);
-    document.addEventListener("keyup", this.onKeyUp);
+    document.addEventListener("keyup", (e) => this.onKeyUp(e));
   }
 
   /**
@@ -109,17 +111,10 @@ export default class Lightbox {
 
     if (i === this.medias.length - 1) {
       i = -1;
+      this.i = -1;
     }
-
+    this.i++;
     this.loadMedia(this.medias[i + 1]);
-
-    // let i = this.gallery.findIndex(
-    //   (media) => media.getAttribute("src") === this.url
-    // );
-    // if (i === this.gallery.length - 1) {
-    //   i = -1;
-    // }
-    // this.loadMedia(this.gallery[i + 1]);
   }
 
   /**
@@ -129,14 +124,16 @@ export default class Lightbox {
   prev(e) {
     e.preventDefault();
 
-    let i = this.medias.findIndex((media) => media === this.media[this.i]);
-    // let i = this.gallery.findIndex(
-    //   (media) => media.getAttribute("src") === this.url
-    // );
-    // if (i === 0) {
-    //   i = this.gallery.length;
-    // }
-    // this.loadMedia(this.gallery[i - 1]);
+    let i = this.medias.findIndex((media) => media === this.medias[this.i]);
+    console.log(i);
+
+    if (i === 0) {
+      this.i = this.medias.length;
+      i = this.medias.length;
+    }
+    this.i--;
+
+    this.loadMedia(this.medias[i - 1]);
   }
 
   /**
@@ -151,7 +148,7 @@ export default class Lightbox {
         <button class="lightbox-next">Suivant</button>
         <button class="lightbox-prev">précédent</button>
         <div class="lightbox-container"></div>
-        <h3>${media.dataset.title}</h3>
+        <h3 class="lightbox-title">${media.dataset.title}</h3>
       </div>`;
     dom
       .querySelector(".lightbox-close")

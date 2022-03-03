@@ -10,8 +10,8 @@ export default class Video {
       <video>
           <source data-title="${this._title}"
             src="./assets/photographers/${this._idPhotograph}/${this._video}"
-            alt="media: ${this._title}"
             type="video/mp4">
+            <track src="./assets/photographers/${this._idPhotograph}/${this._video}" label="${this._title}" kind="captions" default >
         </video>
         `;
     return result;

@@ -10,14 +10,14 @@ export default class BannerPhotographers {
 
     const bannerPhotographers = `  
     <article>
-      <a href="./photographer.html?id=${this._photographers.id}"><div>
+      <a aria-label="Aller sur la page photographe du nom de ${
+        this._photographers.name
+      }" href="./photographer.html?id=${this._photographers.id}"><div>
         <img
           src="./assets/photographers/PhotographersIDPhotos/${
             this._photographers.portrait
           }"
-          alt="Aller sur la page photographe du nom de ${
-            this._photographers.name
-          }"
+          alt="Photographe du nom de ${this._photographers.name}"
         />
         <h2>${this._photographers.name}</h2>
         </a>

@@ -10,7 +10,7 @@ export default class BannerPhotograph {
     const bannerPhotograph = `
     <div class='details-photograph'>
       <h1>${this._photograph.name}</h1>
-      <p>${this._photograph.city}, ${this._photograph.country}</p>
+      <h2>${this._photograph.city}, ${this._photograph.country}</h2>
       <span>${this._photograph.tagline}</span>
     </div>
     <button class="contact_button">

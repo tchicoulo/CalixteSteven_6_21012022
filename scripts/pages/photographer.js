@@ -70,8 +70,7 @@ function gallery(data) {
     }
   });
 
-  // Nombre total de likes ////////////
-  // console.log("Total : " + galleryUser.counterOfLikes());
+  // Counter total of likes
   const totalLikes = galleryUser.counterOfLikes();
   localStorage.setItem("totalLikes", totalLikes);
 

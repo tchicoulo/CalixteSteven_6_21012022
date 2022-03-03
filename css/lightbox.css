@@ -98,8 +98,9 @@
   animation: lightboxIn 0.5s;
 }
 
-.lightbox-container h3 {
+.lightbox-title {
   margin-top: 10px;
+  margin-left: 100px;
   width: 1050px;
   text-align: left;
   color: #901c1c;

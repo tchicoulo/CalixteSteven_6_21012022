@@ -22,7 +22,8 @@
   font-size: 45px;
   color: #d3573c;
 }
-.details-photograph > p {
+
+.details-photograph > h2 {
   font-size: 25px;
   color: #901c1c;
 }
