@@ -13,7 +13,7 @@ export default class BannerPhotograph {
       <h2>${this._photograph.city}, ${this._photograph.country}</h2>
       <span>${this._photograph.tagline}</span>
     </div>
-    <button class="contact_button">
+    <button class="contact_button" aria-label="Contact Me">
           Contactez-moi
         </button>
     <img src="assets/photographers/PhotographersIDPhotos/${this._photograph.portrait}" alt="portrait de ${this._photograph.name}" />`;

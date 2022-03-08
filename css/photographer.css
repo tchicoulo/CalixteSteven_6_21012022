@@ -66,6 +66,8 @@
 
 .sort-by select,
 option {
+  cursor: pointer;
+  margin-left: 15px;
   padding-left: 10px;
   font-weight: bold;
   height: 69px;
@@ -73,6 +75,34 @@ option {
   border-radius: 5px;
   background: #901c1c;
   color: white;
+}
+
+.sort-by select:focus {
+  padding-right: 30px;
+  position: relative;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  background: url('data:image/svg+xml;utf8, <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.88 10.5469L8 4.44021L14.12 10.5469L16 8.66688L8 0.666874L-3.12482e-07 8.66687L1.88 10.5469Z" fill="white"/></svg>')
+    right center/ 16px 11px no-repeat;
+  background-position: right 10px top 50%;
+  background-color: #901c1c;
+}
+
+.sort-by select {
+  cursor: pointer;
+  transition: 300ms;
+  padding-right: 30px;
+  position: relative;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  background: url('data:image/svg+xml;utf8, <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.12 0.453125L8 6.55979L1.88 0.453125L0 2.33312L8 10.3331L16 2.33312L14.12 0.453125Z" fill="white"/></svg>')
+    no-repeat;
+  background-position: right 10px top 50%;
+  background-color: #901c1c;
 }
 
 /* GALLERY */
@@ -165,18 +195,19 @@ option {
   padding: 35px;
 }
 
-.modal header {
+div .modal-container {
+  display: flex;
   justify-content: space-between;
   width: 100%;
   padding-bottom: 25px;
   margin: 15px 0;
 }
 
-.modal header img {
+div .modal-container img {
   cursor: pointer;
 }
 
-.modal header h2 {
+div .modal-container h2 {
   font-size: 58px;
   font-weight: normal;
   text-align: left;

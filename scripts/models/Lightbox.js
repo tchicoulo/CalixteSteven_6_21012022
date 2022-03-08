@@ -15,8 +15,6 @@ export default class Lightbox {
 
       console.log(medias);
 
-      // const gallery = medias.map((media) => media.getAttribute("src"));
-
       medias.forEach((media, index) =>
         media.addEventListener("click", (e) => {
           e.preventDefault();
@@ -47,7 +45,7 @@ export default class Lightbox {
 
   /**
    *
-   * @param {string} url URL de l'image et de la video
+   * @param {String} url URL de l'image et de la video
    */
 
   loadMedia(media) {
@@ -57,14 +55,18 @@ export default class Lightbox {
     container.innerHTML = "";
     container.appendChild(loader);
     container.removeChild(loader);
+    const h3 = this.element.querySelector(".lightbox-title");
 
     if (media == "[object HTMLVideoElement]") {
+      console.log(media);
       const mediaVideo = media.outerHTML;
       container.innerHTML = mediaVideo;
       container.getElementsByTagName("video")[0].controls = true;
       container.getElementsByTagName("video")[0].autoplay = true;
+      h3.textContent = media.querySelector("source").dataset.title;
     } else {
       container.innerHTML = media.outerHTML;
+      h3.textContent = media.dataset.title;
     }
   }
 
@@ -139,16 +141,17 @@ export default class Lightbox {
   /**
    * @return {HTMLElement}
    */
-  buildDOM(media) {
+  buildDOM() {
     const dom = document.createElement("div");
+    dom.setAttribute("aria-label", "Image closeup view");
     dom.classList.add("lightbox-modal");
     dom.innerHTML = `
       <div class="lightbox">
-        <button class="lightbox-close">Fermer</button>
-        <button class="lightbox-next">Suivant</button>
-        <button class="lightbox-prev">précédent</button>
+        <button class="lightbox-close" aria-label="Close dialog">Fermer</button>
+        <button class="lightbox-next" aria-label="Next image">Suivant</button>
+        <button class="lightbox-prev" aria-label="Previous image">précédent</button>
         <div class="lightbox-container"></div>
-        <h3 class="lightbox-title">${media.dataset.title}</h3>
+        <h3 class="lightbox-title"></h3>
       </div>`;
     dom
       .querySelector(".lightbox-close")

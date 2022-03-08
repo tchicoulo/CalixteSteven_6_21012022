@@ -30,6 +30,12 @@ export default class Form {
     }, 600);
   }
 
+  closeModalKeyUp(e) {
+    if (e.key === "Escape") {
+      this.closeModal(e);
+    }
+  }
+
   errorDisplay(tag, message, valid) {
     const errorMessage = document.querySelector(".error-" + tag);
 
@@ -95,12 +101,12 @@ export default class Form {
     const dom = document.querySelector(".contact-modal");
     dom.innerHTML = `
     <div class="modal">
-        <header>
-          <h2 class="form-name"></h2>
-          <img src="assets/icons/close.svg" class="close-modal" />
-        </header>
+        <div class="modal-container">
+          <h2 class="form-name">Nom du contact</h2>
+          <img src="assets/icons/close.svg" class="close-modal" aria-label="Fermer le formulaire"/>
+        </div>
         <div class="modal-body">
-          <form>
+          <form aria-label="Formulaire de contact">
               <label for="first">Prénom</label>
               <input type="text" autocomplete="off" name="first" id="first" />
               <span class="error-first"></span>
@@ -125,6 +131,8 @@ export default class Form {
     dom
       .querySelector(".close-modal")
       .addEventListener("click", this.closeModal);
+
+    document.addEventListener("keyup", (e) => this.closeModalKeyUp(e));
 
     const inputs = document.querySelectorAll(
       "input[type='text'], textarea[name='message']"
