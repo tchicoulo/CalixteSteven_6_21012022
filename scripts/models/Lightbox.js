@@ -1,7 +1,7 @@
 /**
- * @property {HTMLElement} element
- * @property {String[]} gallery Chemins des images de la lightbox
- * @param {String} url Image actuellement affiché
+ * @property {HTMLElement} element Création du Dom avec le media sélectionné
+ * @property {String[]} medias Array des images de la lightbox
+ * @param {Number} index Index de l'image ou de la video actuellement affiché
  */
 
 export default class Lightbox {
@@ -13,8 +13,6 @@ export default class Lightbox {
         )
       );
 
-      console.log(medias);
-
       medias.forEach((media, index) =>
         media.addEventListener("click", (e) => {
           e.preventDefault();
@@ -22,30 +20,37 @@ export default class Lightbox {
           new Lightbox(index, medias);
         })
       );
+
+      medias.forEach((media, index) =>
+        media.addEventListener("keyup", (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            new Lightbox(index, medias);
+          }
+        })
+      );
     }, 1500);
   }
 
   /**
-   * @param {String} url URL de l'image et de la video
-   * @param {String[]} medias Chemins des images de la lightbox
+   * @param {Number} index Index de l'image ou de la video actuellement affiché
+   * @param {String[]} medias Array des images de la lightbox
    */
+
   constructor(index, medias) {
     this.medias = medias;
-
     this.i = index;
-    let media = this.medias[this.i];
 
+    let media = this.medias[this.i];
     this.element = this.buildDOM(media);
     this.loadMedia(media);
-
-    this.onKeyUp = this.onKeyUp.bind(this);
     document.body.appendChild(this.element);
     document.addEventListener("keyup", (e) => this.onKeyUp(e));
   }
 
   /**
-   *
-   * @param {String} url URL de l'image et de la video
+   * media de l'image actuellement sélectionné
+   * @param {String} media
    */
 
   loadMedia(media) {
@@ -71,7 +76,7 @@ export default class Lightbox {
   }
 
   /**
-   *
+   * Evènements des touches aux claviers de la lightbox
    * @param {KeyboardEvent} e
    */
 
@@ -102,6 +107,7 @@ export default class Lightbox {
   }
 
   /**
+   * Passe à l'image suivante
    * @param {MouseEvent|KeyboardEvent} e
    */
 
@@ -109,7 +115,6 @@ export default class Lightbox {
     e.preventDefault();
 
     let i = this.medias.findIndex((media) => media === this.medias[this.i]);
-    console.log(i);
 
     if (i === this.medias.length - 1) {
       i = -1;
@@ -120,6 +125,7 @@ export default class Lightbox {
   }
 
   /**
+   * Passe à l'image précédente
    * @param {MouseEvent|KeyboardEvent} e
    */
 
@@ -127,7 +133,6 @@ export default class Lightbox {
     e.preventDefault();
 
     let i = this.medias.findIndex((media) => media === this.medias[this.i]);
-    console.log(i);
 
     if (i === 0) {
       this.i = this.medias.length;
@@ -139,6 +144,7 @@ export default class Lightbox {
   }
 
   /**
+   * Création du DOM
    * @return {HTMLElement}
    */
   buildDOM() {

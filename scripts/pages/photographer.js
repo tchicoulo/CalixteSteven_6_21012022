@@ -41,7 +41,6 @@ function gallery(data) {
   );
 
   const galleryUser = new Gallery(galleryMedias);
-  console.log(galleryUser);
 
   //Sort by
   buttonSort.addEventListener("change", function (e) {
@@ -62,8 +61,6 @@ function gallery(data) {
         galleryUser.sortByTitle();
         Lightbox.init();
         galleryUser.displayGallery();
-
-        // Like(heartIcons);
         break;
       default:
         console.log(`Out of ${e.target.value}`);

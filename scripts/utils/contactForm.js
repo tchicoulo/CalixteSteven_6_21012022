@@ -101,12 +101,12 @@ export default class Form {
     const dom = document.querySelector(".contact-modal");
     dom.innerHTML = `
     <div class="modal">
-        <div class="modal-container">
+        <div class="modal-container" role="form">
           <h2 class="form-name">Nom du contact</h2>
-          <img src="assets/icons/close.svg" class="close-modal" aria-label="Fermer le formulaire"/>
+          <img src="assets/icons/close.svg" class="close-modal" aria-label="Close Contact form"/>
         </div>
         <div class="modal-body">
-          <form aria-label="Formulaire de contact">
+          <form aria-label="Formulaire de contact" >
               <label for="first">Prénom</label>
               <input type="text" autocomplete="off" name="first" id="first" />
               <span class="error-first"></span>
@@ -123,7 +123,7 @@ export default class Form {
               <textarea name="message" autocomplete="off" id="message"></textarea>
               <span class="error-message"></span>
 
-            <button class="btn-submit">Envoyer</button>
+            <button class="btn-submit" aria-label="Send">Envoyer</button>
           </form>
         </div>
       </div>`;
@@ -178,7 +178,8 @@ export default class Form {
         this.closeModal();
         setTimeout(() => {
           alert("Inscription Validée !");
-        }, 500);
+          window.location = "./index.html";
+        }, 1000);
       } else {
         alert("Veuillez Remplir correctement les champs");
       }

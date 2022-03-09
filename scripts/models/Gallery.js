@@ -1,5 +1,10 @@
 import MediasFactory from "../factories/MediasFactory.js";
 
+/**
+ * Objet contenant les medias de l'id sélectionné
+ * @property {object} arrayMedias
+ */
+
 export default class Gallery {
   constructor(arrayMedias) {
     this._arrayMedias = arrayMedias;
@@ -42,7 +47,6 @@ export default class Gallery {
     let likeSelector = e.path[1].querySelector(".likes");
 
     let likeContent = parseInt(likeSelector.innerText);
-    console.log(likeContent);
 
     // Total likes in localStorage
     let totalLikes = localStorage.getItem("totalLikes");
@@ -76,7 +80,7 @@ export default class Gallery {
       <span class="price">${localStorage.getItem("prix/heure")}€/heure</span>`;
   }
 
-  //Gallery of pictures
+  //Gallery of medias
   displayMedias(media) {
     const mediaDOM = new MediasFactory(media);
 
@@ -87,7 +91,7 @@ export default class Gallery {
         <h3>${media.title}</h3>
         <div>
         <span class="likes">${media.likes}</span>
-        <i class="fas fa-heart"></i>
+        <i class="fas fa-heart" aria-label="likes"></i>  
         </div>
       </div>
     </div>

@@ -26,6 +26,7 @@
   z-index: 10;
   animation: lightboxIn 0.5s;
   transition: opacity 0.3s;
+  overflow: hidden;
 }
 
 .lightbox {
@@ -33,6 +34,7 @@
   height: 984px;
   z-index: 10;
   position: relative;
+  overflow: hidden;
 }
 
 .lightbox-loader {
