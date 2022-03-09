@@ -106,21 +106,21 @@ export default class Form {
           <img src="assets/icons/close.svg" class="close-modal" aria-label="Close Contact form"/>
         </div>
         <div class="modal-body">
-          <form aria-label="Formulaire de contact" >
-              <label for="first">Prénom</label>
-              <input type="text" autocomplete="off" name="first" id="first" />
+          <form aria-label="Contact Form" >
+              <label id="First-name" for="first">Prénom</label>
+              <input type="text" autocomplete="off" aria-labelledby="First-name" name="first" id="first" />
               <span class="error-first"></span>
             <br />
-              <label for="last">Nom</label>
-              <input type="text" autocomplete="off" name="last" id="last" />
+              <label id="Last-name" for="last">Nom</label>
+              <input type="text" autocomplete="off" aria-labelledby="Last-name" name="last" id="last" />
               <span class="error-last"></span>
             <br />
-              <label for="mail">Email</label>
-              <input type="text" autocomplete="off" name="mail" id="mail" />
+              <label id="Email" for="mail">Email</label>
+              <input type="text" autocomplete="off" aria-labelledby="Email" name="mail" id="mail" />
               <span class="error-email"></span>
             <br />
-              <label for="message">Votre message</label>
-              <textarea name="message" autocomplete="off" id="message"></textarea>
+              <label id="Your-message" for="message">Votre message</label>
+              <textarea name="message" autocomplete="off" aria-labelledby="Your-message" id="message"></textarea>
               <span class="error-message"></span>
 
             <button class="btn-submit" aria-label="Send">Envoyer</button>

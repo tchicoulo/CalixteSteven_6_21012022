@@ -133,8 +133,27 @@ option {
   justify-content: space-between;
 }
 
+.gallery-details div {
+  display: flex;
+  justify-content: center;
+}
+
 .likes {
+  margin-right: 5px;
   font-weight: bold;
+}
+
+.fa-heart {
+  cursor: pointer;
+  transition: 100ms;
+}
+
+.fa-heart:hover {
+  transform: scale(1.15);
+}
+
+.fa-heart:active {
+  transform: scale(0.9);
 }
 
 /* COUNTER LIKES */

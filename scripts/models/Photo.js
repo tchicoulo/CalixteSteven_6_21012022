@@ -12,7 +12,7 @@ export default class Photo {
 
   getMedia() {
     const result = `
-      <img data-title="${this._title}" tabindex="1"
+      <img data-title="${this._title}" tabindex="0"
         src="./assets/photographers/${this._idPhotograph}/${this._img}" alt="media: ${this._title}">`;
 
     return result;

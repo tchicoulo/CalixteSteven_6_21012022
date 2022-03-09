@@ -36,14 +36,22 @@ export default class Gallery {
         return this.displayMedias(media);
       })
       .join("");
-    gallery
-      .querySelectorAll(".fa-heart")
-      .forEach((heart) => heart.addEventListener("click", (e) => this.like(e)));
+    gallery.querySelectorAll(".fa-heart").forEach((heart) => {
+      heart.addEventListener("keyup", (e) => {
+        if (e.key === "Enter") {
+          this.like(e);
+        }
+      });
+
+      heart.addEventListener("click", (e) => this.like(e));
+    });
+
     return gallery;
   }
 
   like(e) {
     //Search Balise with number of likes
+
     let likeSelector = e.path[1].querySelector(".likes");
 
     let likeContent = parseInt(likeSelector.innerText);
@@ -84,14 +92,14 @@ export default class Gallery {
   displayMedias(media) {
     const mediaDOM = new MediasFactory(media);
 
-    const result = `
+    const result = `    
     <div class="gallery-content">
       ${mediaDOM.display()}
       <div class="gallery-details">
         <h3>${media.title}</h3>
         <div>
         <span class="likes">${media.likes}</span>
-        <i class="fas fa-heart" aria-label="likes"></i>  
+        <img src="./assets/icons/red-heart.svg"class="fa-heart" tabindex="0" aria-label="likes"/>
         </div>
       </div>
     </div>
