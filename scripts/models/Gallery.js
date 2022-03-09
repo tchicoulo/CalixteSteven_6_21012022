@@ -99,7 +99,7 @@ export default class Gallery {
         <h3>${media.title}</h3>
         <div>
         <span class="likes">${media.likes}</span>
-        <img src="./assets/icons/red-heart.svg"class="fa-heart" tabindex="0" aria-label="likes"/>
+        <img src="./assets/icons/red-heart.svg"class="fa-heart" tabindex="0" alt="likes"/>
         </div>
       </div>
     </div>
