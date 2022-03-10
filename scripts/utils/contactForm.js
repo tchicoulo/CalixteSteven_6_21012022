@@ -19,6 +19,15 @@ export default class Form {
     )}`;
     const modal = document.querySelector(".contact-modal");
     modal.classList.add("modalIn");
+
+    //remove tabindex on medias to have a better accessibility
+    const medias = document.querySelectorAll(
+      ".gallery-content img, .gallery-content video"
+    );
+    medias.forEach((media) => media.removeAttribute("tabindex"));
+
+    const hiddenSortButton = document.querySelector("#sort");
+    hiddenSortButton.setAttribute("disabled", "disabled");
   }
 
   closeModal() {
@@ -27,6 +36,13 @@ export default class Form {
     setTimeout(() => {
       modal.classList.remove("modalOut");
       modal.classList.remove("modalIn");
+      const medias = document.querySelectorAll(
+        ".gallery-content img, .gallery-content video"
+      );
+      medias.forEach((media) => media.setAttribute("tabindex", "0"));
+
+      const hiddenSortButton = document.querySelector("#sort");
+      hiddenSortButton.removeAttribute("disabled");
     }, 600);
   }
 
@@ -52,7 +68,7 @@ export default class Form {
     if (value.length > 0 && (value.length < 3 || value.length > 30)) {
       this.errorDisplay(
         "first",
-        "Le pseudo doit faire entre 3 et 30 caractères"
+        "Le prénom doit faire entre 3 et 30 caractères"
       );
       this.first = null;
     } else {
@@ -63,10 +79,7 @@ export default class Form {
 
   lastChecker(value) {
     if (value.length > 0 && (value.length < 3 || value.length > 30)) {
-      this.errorDisplay(
-        "last",
-        "Le pseudo doit faire entre 3 et 30 caractères"
-      );
+      this.errorDisplay("last", "Le nom doit faire entre 3 et 30 caractères");
       this.last = null;
     } else {
       this.errorDisplay("last", "", true);
@@ -108,20 +121,20 @@ export default class Form {
         <div class="modal-body">
           <form aria-label="Contact Form" >
               <label id="First-name" for="first">Prénom</label>
-              <input type="text" autocomplete="off" aria-labelledby="First-name" name="first" id="first" />
-              <span class="error-first"></span>
+              <input type="text" autocomplete="off" aria-labelledby="First-name First-name-error" name="first" id="first" />
+              <span class="error-first" id="First-name-error"></span>
             <br />
               <label id="Last-name" for="last">Nom</label>
-              <input type="text" autocomplete="off" aria-labelledby="Last-name" name="last" id="last" />
-              <span class="error-last"></span>
+              <input type="text" autocomplete="off" aria-labelledby="Last-name Last-name-error" name="last" id="last" />
+              <span class="error-last" id="Last-name-error"></span>
             <br />
               <label id="Email" for="mail">Email</label>
-              <input type="text" autocomplete="off" aria-labelledby="Email" name="mail" id="mail" />
-              <span class="error-email"></span>
+              <input type="text" autocomplete="off" aria-labelledby="Email Email-error" name="mail" id="mail" />
+              <span class="error-email" id="Email-error"></span>
             <br />
               <label id="Your-message" for="message">Votre message</label>
-              <textarea name="message" autocomplete="off" aria-labelledby="Your-message" id="message"></textarea>
-              <span class="error-message"></span>
+              <textarea name="message" autocomplete="off" aria-labelledby="Your-message Your-message-error" id="message"></textarea>
+              <span class="error-message" id="Your-message-error"></span>
 
             <button class="btn-submit" aria-label="Send">Envoyer</button>
           </form>

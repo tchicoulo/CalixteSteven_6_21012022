@@ -17,7 +17,8 @@ export default class BannerPhotographers {
           src="./assets/photographers/PhotographersIDPhotos/${
             this._photographers.portrait
           }"
-          alt="Photographe du nom de ${this._photographers.name}"
+          alt="Visiter la page 
+            Photographe du nom de ${this._photographers.name}"
         />
         <h2>${this._photographers.name}</h2>
         </a>

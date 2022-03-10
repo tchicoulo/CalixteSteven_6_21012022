@@ -65,6 +65,7 @@ export default class Gallery {
       likeContent--;
       likeSelector.textContent = likeContent;
       totalLikes = localStorage.setItem("totalLikes", totalLikes - 1);
+      e.path[0].setAttribute("aria-label", "Like supprimé");
 
       Gallery.counterDisplay();
     } else {
@@ -72,6 +73,7 @@ export default class Gallery {
       likeContent++;
       likeSelector.textContent = likeContent;
       totalLikes = localStorage.setItem("totalLikes", totalLikes + 1);
+      e.path[0].setAttribute("aria-label", "Like ajouté");
 
       Gallery.counterDisplay();
     }

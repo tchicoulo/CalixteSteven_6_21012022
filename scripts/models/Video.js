@@ -12,7 +12,7 @@ export default class Video {
 
   getMedia() {
     const result = `
-      <video tabindex="0">
+      <video tabindex="0" title="video ${this._title}">
           <source data-title="${this._title}" 
             src="./assets/photographers/${this._idPhotograph}/${this._video}"
             type="video/mp4">

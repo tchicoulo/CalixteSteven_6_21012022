@@ -68,8 +68,10 @@ export default class Lightbox {
       container.innerHTML = mediaVideo;
       container.getElementsByTagName("video")[0].controls = true;
       container.getElementsByTagName("video")[0].autoplay = true;
+
       h3.textContent = media.querySelector("source").dataset.title;
     } else {
+      console.log(media);
       container.innerHTML = media.outerHTML;
       h3.textContent = media.dataset.title;
     }
@@ -148,7 +150,7 @@ export default class Lightbox {
    * @return {HTMLElement}
    */
   buildDOM() {
-    const dom = document.createElement("div");
+    const dom = document.createElement("section");
     dom.setAttribute("aria-label", "Image closeup view");
     dom.classList.add("lightbox-modal");
     dom.innerHTML = `
