@@ -16,8 +16,11 @@ export default class Lightbox {
       medias.forEach((media, index) =>
         media.addEventListener("click", (e) => {
           e.preventDefault();
+          console.log(e);
+          console.log(media);
 
           new Lightbox(index, medias);
+          document.querySelector(".gallery").style.visibility = "hidden";
         })
       );
 
@@ -25,7 +28,9 @@ export default class Lightbox {
         media.addEventListener("keyup", (e) => {
           if (e.key === "Enter") {
             e.preventDefault();
+
             new Lightbox(index, medias);
+            document.querySelector(".gallery").style.visibility = "hidden"; //make it invisible for a better accessibility
           }
         })
       );
@@ -63,15 +68,12 @@ export default class Lightbox {
     const h3 = this.element.querySelector(".lightbox-title");
 
     if (media == "[object HTMLVideoElement]") {
-      console.log(media);
       const mediaVideo = media.outerHTML;
       container.innerHTML = mediaVideo;
-      container.getElementsByTagName("video")[0].controls = true;
       container.getElementsByTagName("video")[0].autoplay = true;
-
+      container.getElementsByTagName("video")[0].loop = true;
       h3.textContent = media.querySelector("source").dataset.title;
     } else {
-      console.log(media);
       container.innerHTML = media.outerHTML;
       h3.textContent = media.dataset.title;
     }
@@ -102,6 +104,7 @@ export default class Lightbox {
   close(e) {
     e.preventDefault();
     this.element.classList.add("fadeOut");
+    document.querySelector(".gallery").style.visibility = "visible"; //make it visible for enabled the accessibility
     window.setTimeout(() => {
       this.element.parentElement.removeChild(this.element);
     }, 500);

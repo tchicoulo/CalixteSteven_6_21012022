@@ -191,7 +191,6 @@ export default class Form {
         this.closeModal();
         setTimeout(() => {
           alert("Inscription Validée !");
-          window.location = "./index.html";
         }, 1000);
       } else {
         alert("Veuillez Remplir correctement les champs");
