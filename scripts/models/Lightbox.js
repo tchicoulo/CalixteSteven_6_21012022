@@ -16,8 +16,6 @@ export default class Lightbox {
       medias.forEach((media, index) =>
         media.addEventListener("click", (e) => {
           e.preventDefault();
-          console.log(e);
-          console.log(media);
 
           new Lightbox(index, medias);
           document.querySelector(".gallery").style.visibility = "hidden";
@@ -158,10 +156,10 @@ export default class Lightbox {
     dom.classList.add("lightbox-modal");
     dom.innerHTML = `
       <div class="lightbox">
-        <button class="lightbox-close" aria-label="Close dialog">Fermer</button>
-        <button class="lightbox-next" aria-label="Next image">Suivant</button>
-        <button class="lightbox-prev" aria-label="Previous image">précédent</button>
-        <div class="lightbox-container"></div>
+      <button class="lightbox-prev" aria-label="Previous image">précédent</button>
+      <div class="lightbox-container"></div>
+      <button class="lightbox-next" aria-label="Next image">Suivant</button>
+      <button class="lightbox-close" aria-label="Close dialog">Fermer</button>
         <h3 class="lightbox-title"></h3>
       </div>`;
     dom
