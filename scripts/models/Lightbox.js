@@ -13,16 +13,14 @@ export default class Lightbox {
         )
       );
 
-      medias.forEach((media, index) =>
+      medias.forEach((media, index) => {
         media.addEventListener("click", (e) => {
           e.preventDefault();
 
           new Lightbox(index, medias);
           document.querySelector(".gallery").style.visibility = "hidden";
-        })
-      );
+        });
 
-      medias.forEach((media, index) =>
         media.addEventListener("keyup", (e) => {
           if (e.key === "Enter") {
             e.preventDefault();
@@ -30,8 +28,8 @@ export default class Lightbox {
             new Lightbox(index, medias);
             document.querySelector(".gallery").style.visibility = "hidden"; //make it invisible for a better accessibility
           }
-        })
-      );
+        });
+      });
     }, 1500);
   }
 
@@ -104,7 +102,7 @@ export default class Lightbox {
     this.element.classList.add("fadeOut");
     document.querySelector(".gallery").style.visibility = "visible"; //make it visible for enabled the accessibility
     window.setTimeout(() => {
-      this.element.parentElement.removeChild(this.element);
+      this.element.remove();
     }, 500);
     document.removeEventListener("keyup", this.onKeyUp);
   }
@@ -113,7 +111,6 @@ export default class Lightbox {
    * Passe à l'image suivante
    * @param {MouseEvent|KeyboardEvent} e
    */
-
   next(e) {
     e.preventDefault();
 
@@ -131,7 +128,6 @@ export default class Lightbox {
    * Passe à l'image précédente
    * @param {MouseEvent|KeyboardEvent} e
    */
-
   prev(e) {
     e.preventDefault();
 
