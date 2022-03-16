@@ -1,12 +1,12 @@
 export default class BannerPhotographers {
-  constructor(photographers) {
-    this._photographers = photographers;
+  constructor (photographers) {
+    this._photographers = photographers
   }
 
-  createBannerPhotographers() {
+  createBannerPhotographers () {
     const photographersSection = document.querySelector(
-      ".photographer_section"
-    );
+      '.photographer_section'
+    )
 
     const bannerPhotographers = `  
     <article>
@@ -33,10 +33,10 @@ export default class BannerPhotographers {
         )}€/heure</p>
       </div>
     </article>
-    `;
+    `
 
-    photographersSection.innerHTML += bannerPhotographers;
+    photographersSection.innerHTML += bannerPhotographers
 
-    return bannerPhotographers;
+    return bannerPhotographers
   }
 }

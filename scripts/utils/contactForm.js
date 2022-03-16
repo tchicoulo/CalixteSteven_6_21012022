@@ -1,117 +1,114 @@
 export default class Form {
-  static init() {
-    const form = new Form();
-    form.displayForm();
+  static init () {
+    const form = new Form()
+    form.displayForm()
   }
 
-  constructor() {
-    this.first;
-    this.last;
-    this.email;
-    this.message;
+  constructor () {
+    return (this.first, this.last, this.email, this.message)
   }
 
-  static displayModal() {
-    const formName = document.querySelector(".form-name");
+  static displayModal () {
+    const formName = document.querySelector('.form-name')
 
     formName.innerHTML = `Contactez moi <br> ${localStorage.getItem(
-      "namePhotograph"
-    )}`;
-    const modal = document.querySelector(".contact-modal");
-    modal.classList.add("modalIn");
+      'namePhotograph'
+    )}`
+    const modal = document.querySelector('.contact-modal')
+    modal.classList.add('modalIn')
 
-    //remove tabindex on medias to have a better accessibility
+    // remove tabindex on medias to have a better accessibility
     const medias = document.querySelectorAll(
-      ".gallery-content img, .gallery-content video"
-    );
-    medias.forEach((media) => media.removeAttribute("tabindex"));
+      '.gallery-content img, .gallery-content video'
+    )
+    medias.forEach((media) => media.removeAttribute('tabindex'))
 
-    const hiddenSortButton = document.querySelector("#sort");
-    hiddenSortButton.setAttribute("disabled", "disabled");
+    const hiddenSortButton = document.querySelector('#sort')
+    hiddenSortButton.setAttribute('disabled', 'disabled')
   }
 
-  closeModal() {
-    const modal = document.querySelector(".contact-modal");
-    modal.classList.add("modalOut");
+  closeModal () {
+    const modal = document.querySelector('.contact-modal')
+    modal.classList.add('modalOut')
     setTimeout(() => {
-      modal.classList.remove("modalOut");
-      modal.classList.remove("modalIn");
+      modal.classList.remove('modalOut')
+      modal.classList.remove('modalIn')
       const medias = document.querySelectorAll(
-        ".gallery-content img, .gallery-content video"
-      );
-      medias.forEach((media) => media.setAttribute("tabindex", "0"));
+        '.gallery-content img, .gallery-content video'
+      )
+      medias.forEach((media) => media.setAttribute('tabindex', '0'))
 
-      const hiddenSortButton = document.querySelector("#sort");
-      hiddenSortButton.removeAttribute("disabled");
-    }, 600);
+      const hiddenSortButton = document.querySelector('#sort')
+      hiddenSortButton.removeAttribute('disabled')
+    }, 600)
   }
 
-  closeModalKeyUp(e) {
-    if (e.key === "Escape") {
-      this.closeModal(e);
+  closeModalKeyUp (e) {
+    if (e.key === 'Escape') {
+      this.closeModal(e)
     }
   }
 
-  errorDisplay(tag, message, valid) {
-    const errorMessage = document.querySelector(".error-" + tag);
+  errorDisplay (tag, message, valid) {
+    const errorMessage = document.querySelector('.error-' + tag)
 
     if (!valid) {
-      errorMessage.classList.add("error");
-      errorMessage.textContent = message;
+      errorMessage.classList.add('error')
+      errorMessage.textContent = message
     } else {
-      errorMessage.classList.remove("error");
-      errorMessage.textContent = message;
+      errorMessage.classList.remove('error')
+      errorMessage.textContent = message
     }
   }
 
-  firstChecker(value) {
+  firstChecker (value) {
     if (value.length > 0 && (value.length < 3 || value.length > 30)) {
       this.errorDisplay(
-        "first",
-        "Le prénom doit faire entre 3 et 30 caractères"
-      );
-      this.first = null;
+        'first',
+        'Le prénom doit faire entre 3 et 30 caractères'
+      )
+      this.first = null
     } else {
-      this.errorDisplay("first", "", true);
-      this.first = value;
+      this.errorDisplay('first', '', true)
+      this.first = value
     }
   }
 
-  lastChecker(value) {
+  lastChecker (value) {
     if (value.length > 0 && (value.length < 3 || value.length > 30)) {
-      this.errorDisplay("last", "Le nom doit faire entre 3 et 30 caractères");
-      this.last = null;
+      this.errorDisplay('last', 'Le nom doit faire entre 3 et 30 caractères')
+      this.last = null
     } else {
-      this.errorDisplay("last", "", true);
-      this.last = value;
+      this.errorDisplay('last', '', true)
+      this.last = value
     }
   }
 
-  mailChecker(value) {
+  mailChecker (value) {
     if (!value.match(/^[\w_-]+@[\w-]+\.[a-z]{2,4}$/i)) {
-      this.errorDisplay("email", "Le mail n'est pas valide");
-      this.email = null;
+      this.errorDisplay('email', "Le mail n'est pas valide")
+      this.email = null
     } else {
-      this.errorDisplay("email", "", true);
-      this.email = value;
+      this.errorDisplay('email', '', true)
+      this.email = value
     }
   }
 
-  messageChecker(value) {
+  messageChecker (value) {
     if (value.length > 0 && (value.length < 10 || value.length > 200)) {
       this.errorDisplay(
-        "message",
-        "Le message doit faire entre 10 et 200 caractères"
-      );
-      this.message = null;
+        'message',
+        'Le message doit faire entre 10 et 200 caractères'
+      )
+      this.message = null
     } else {
-      this.errorDisplay("message", "", true);
-      this.message = value;
+      this.errorDisplay('message', '', true)
+      this.message = value
     }
   }
 
-  displayForm() {
-    const dom = document.querySelector(".contact-modal");
+  displayForm () {
+    const dom = document.querySelector('.contact-modal')
     dom.innerHTML = `
     <div class="modal">
         <div class="modal-container" role="form">
@@ -139,66 +136,67 @@ export default class Form {
             <button class="btn-submit" aria-label="Send">Envoyer</button>
           </form>
         </div>
-      </div>`;
-    const form = document.querySelector("form");
+      </div>`
+    const form = document.querySelector('form')
     dom
-      .querySelector(".close-modal")
-      .addEventListener("click", this.closeModal);
+      .querySelector('.close-modal')
+      .addEventListener('click', this.closeModal)
 
-    document.addEventListener("keyup", (e) => this.closeModalKeyUp(e));
+    document.addEventListener('keyup', (e) => this.closeModalKeyUp(e))
 
     const inputs = document.querySelectorAll(
       "input[type='text'], textarea[name='message']"
-    );
+    )
     inputs.forEach((input) => {
-      input.addEventListener("input", (e) => {
+      input.addEventListener('input', (e) => {
         switch (e.target.id) {
-          case "first":
-            this.firstChecker(e.target.value);
-            break;
-          case "last":
-            this.lastChecker(e.target.value);
-            break;
-          case "mail":
-            this.mailChecker(e.target.value);
-            break;
-          case "message":
-            this.messageChecker(e.target.value);
+          case 'first':
+            this.firstChecker(e.target.value)
+            break
+          case 'last':
+            this.lastChecker(e.target.value)
+            break
+          case 'mail':
+            this.mailChecker(e.target.value)
+            break
+          case 'message':
+            this.messageChecker(e.target.value)
+            break
           default:
-            null;
+            return null
         }
-      });
-    });
+      })
+    })
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
+    form.addEventListener('submit', (e) => {
+      e.preventDefault()
 
       if (this.first && this.last && this.email && this.message) {
         const data = {
           Prenom: this.first,
           Nom: this.last,
           Email: this.email,
-          Message: this.message,
-        };
-        console.log(data);
-        inputs.forEach((input) => (input.value = ""));
+          Message: this.message
+        }
+        console.log(data)
+        inputs.forEach((input) => (input.value = ''))
 
-        this.first = null;
-        this.last = null;
-        this.email = null;
-        this.message = null;
+        this.first = null
+        this.last = null
+        this.email = null
+        this.message = null
 
-        this.closeModal();
+        this.closeModal()
         setTimeout(() => {
-          alert("Inscription Validée !");
-        }, 1000);
+          alert('Inscription Validée !')
+        }, 1000)
       } else {
-        alert("Veuillez Remplir correctement les champs");
+        alert('Veuillez Remplir correctement les champs')
       }
-    });
+    })
 
-    return dom;
+    return dom
   }
 }
 
-Form.init();
+Form.init()

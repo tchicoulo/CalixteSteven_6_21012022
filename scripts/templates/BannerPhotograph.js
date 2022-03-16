@@ -1,11 +1,11 @@
 export default class BannerPhotograph {
-  constructor(photograph) {
-    this._photograph = photograph;
-    this.createBannerPhotograph();
+  constructor (photograph) {
+    this._photograph = photograph
+    this.createBannerPhotograph()
   }
 
-  createBannerPhotograph() {
-    const photographHeader = document.querySelector(".photograph-header");
+  createBannerPhotograph () {
+    const photographHeader = document.querySelector('.photograph-header')
 
     const bannerPhotograph = `
     <div class='details-photograph'>
@@ -14,19 +14,19 @@ export default class BannerPhotograph {
       <span>${this._photograph.tagline}</span>
     </div>
     <button class="contact_button" aria-label="Contact Me ${localStorage.getItem(
-      "namePhotograph"
+      'namePhotograph'
     )}">
           Contactez-moi
         </button>
     <img src="assets/photographers/PhotographersIDPhotos/${
       this._photograph.portrait
-    }" alt="portrait de ${this._photograph.name}" />`;
+    }" alt="portrait de ${this._photograph.name}" />`
 
-    photographHeader.innerHTML = bannerPhotograph;
+    photographHeader.innerHTML = bannerPhotograph
 
-    let name = document.querySelector("h1");
-    localStorage.setItem("namePhotograph", name.textContent);
+    const name = document.querySelector('h1')
+    localStorage.setItem('namePhotograph', name.textContent)
 
-    return photographHeader;
+    return photographHeader
   }
 }

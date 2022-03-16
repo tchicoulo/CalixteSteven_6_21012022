@@ -1,5 +1,5 @@
-import Photo from "../models/Photo.js";
-import Video from "../models/Video.js";
+import Photo from '../models/Photo.js'
+import Video from '../models/Video.js'
 
 /**
  * Données de la video ou de la video via le mediaFactory
@@ -7,18 +7,16 @@ import Video from "../models/Video.js";
  */
 
 export default class MediasFactory {
-  constructor(data) {
-    this.media = null;
-    if (data.hasOwnProperty("image")) {
-      this.media = new Photo(data);
-    } else if (data.hasOwnProperty("video")) {
-      this.media = new Video(data);
-    } else {
-      throw "Erreur: Type de format non reconnu";
+  constructor (data) {
+    this.media = null
+    if (Object.prototype.hasOwnProperty.call(data, 'image')) {
+      this.media = new Photo(data)
+    } else if (Object.prototype.hasOwnProperty.call(data, 'video')) {
+      this.media = new Video(data)
     }
   }
 
-  display() {
-    return this.media.getMedia();
+  display () {
+    return this.media.getMedia()
   }
 }

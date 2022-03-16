@@ -4,13 +4,13 @@
  */
 
 export default class Video {
-  constructor(data) {
-    this._title = data.title;
-    this._idPhotograph = data.photographerId;
-    this._video = data.video;
+  constructor (data) {
+    this._title = data.title
+    this._idPhotograph = data.photographerId
+    this._video = data.video
   }
 
-  getMedia() {
+  getMedia () {
     const result = `
       <video tabindex="0" title="video ${this._title}">
           <source data-title="${this._title}" 
@@ -18,7 +18,7 @@ export default class Video {
             type="video/mp4">
             <track src="./assets/photographers/${this._idPhotograph}/${this._video}" label="${this._title}" kind="captions" default >
         </video>
-        `;
-    return result;
+        `
+    return result
   }
 }

@@ -1,27 +1,27 @@
-import BannerPhotographers from "../templates/BannerPhotographers.js";
+import BannerPhotographers from '../templates/BannerPhotographers.js'
 
-async function getPhotographers() {
+async function getPhotographers () {
   // Fetch Json data
-  let photographers = [];
-  await fetch("./data/photographers.json")
+  let photographers = []
+  await fetch('./data/photographers.json')
     .then((res) => res.json())
-    .then((data) => (photographers = data));
+    .then((data) => (photographers = data))
 
-  //return photographers data
-  return photographers;
+  // return photographers data
+  return photographers
 }
 
-function displayData(photographers) {
+function displayData (photographers) {
   photographers.map((photographer) => {
-    const template = new BannerPhotographers(photographer);
-    return template.createBannerPhotographers();
-  });
+    const template = new BannerPhotographers(photographer)
+    return template.createBannerPhotographers()
+  })
 }
 
-async function init() {
+async function init () {
   // Get photographers
-  const { photographers } = await getPhotographers();
-  displayData(photographers);
+  const { photographers } = await getPhotographers()
+  displayData(photographers)
 }
 
-init();
+init()
